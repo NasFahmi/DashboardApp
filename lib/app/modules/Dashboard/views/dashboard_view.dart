@@ -168,8 +168,27 @@ class DashboardView extends GetView<DashboardController> {
                       margin: EdgeInsets.only(left: 16.w),
                       height: 140.h,
                       decoration: BoxDecoration(
-                        color: AppColors.blueColorPrimary,
+                        color: AppColors.backgroundColorSecoundary,
                         shape: BoxShape.rectangle,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Center(
+                              child: Image(
+                                height: 60,
+                                image: AssetImage('assets/images/snack.png'),
+                              ),
+                            ),
+                            Gap(4.h),
+                            Text(
+                              'Produk A',
+                              style: TextStyle(fontSize: 12.sp),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   } else {
