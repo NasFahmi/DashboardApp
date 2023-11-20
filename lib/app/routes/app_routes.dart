@@ -9,6 +9,7 @@ abstract class Routes {
   static const NOTES_PRE_ORDER = _Paths.NOTES_PRE_ORDER;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const ON_BOARD = _Paths.ON_BOARD;
+  static const LOGIN = _Paths.LOGIN;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const NOTES_PRE_ORDER = '/notes-pre-order';
   static const DASHBOARD = '/dashboard';
   static const ON_BOARD = '/on-board';
+  static const LOGIN = '/login';
 }
