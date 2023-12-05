@@ -81,7 +81,7 @@ class LoginView extends GetView<LoginController> {
                             controller.authLogin();
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 16.h),
+                            padding: EdgeInsets.symmetric(vertical: 12.h),
                             decoration: BoxDecoration(
                               color: AppColors.blueColorPrimary,
                               borderRadius: BorderRadius.all(
@@ -92,7 +92,7 @@ class LoginView extends GetView<LoginController> {
                               child: Text(
                                 'Login',
                                 style: TextStyle(
-                                  fontSize: 20.sp,
+                                  fontSize: 16.sp,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
