@@ -14,7 +14,10 @@ dependencies:
   flutter_svg: ^2.0.9
   gap: ^3.0.1
   get: 4.6.6
+  google_fonts: ^6.1.0
   google_nav_bar: ^5.0.6
+  lottie: ^2.7.0
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -25,4 +28,5 @@ flutter:
   uses-material-design: true
   assets:
   - assets/images/
+  - assets/images/animation/
 

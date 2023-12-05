@@ -2,26 +2,29 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // !Main Color
-  static const Color blueColorPrimary = Color(0xFF276ED8);
-  static const Color blueColorSecondary = Color(0xFFC0EEF4);
-  static const Color redColorPrimary = Color(0xffD84727);
-  static const Color redColorSecoundary = Color(0xffF4C6C0);
-  static const Color greenColorPrimary = Color(0xff2CC93B);
-  static const Color greenColorSecoundary = Color(0xffC0F4CB);
-  static const Color yellowColorPrimary = Color(0xffD4D827);
-  static const Color yellowColorSecoundary = Color(0xffF4F2C0);
+  static const Color blueColorPrimary = Color(0xFF2563eb);
+  static const Color blueColorSecondary = Color(0xFF93c5fd);
+  static const Color redColorPrimary = Color(0xffdc2626);
+  static const Color redColorSecoundary = Color(0xfffca5a5);
+  static const Color greenColorPrimary = Color(0xff16a34a);
+  static const Color greenColorSecoundary = Color(0xff86efac);
+  static const Color yellowColorPrimary = Color(0xffca8a04);
+  static const Color yellowColorSecoundary = Color(0xfffde047);
   static const Color blackColor = Color(0xff0F172A);
 
   // ! widget Color
-  static const Color backgroundColor = Color(0xffF5F5FA);
-  static const Color strokeColor = Color(0xffc2c2c2);
-  static const Color backgroundColorSecoundary = Color(0xffF5f5f7);
+  static const Color backgroundColor = Color(0xfff9fafb);
+  static const Color strokeColor = Color(0xfff3f4f6);
+  static const Color backgroundColorSecoundary = Color(0xfff3f4f6);
 
   //! font Color
-  static const Color primaryTextColor = Color(0xff313131);
-  static const Color labelTextColor = Color(0xff616161);
-  static const Color secondaryTextColor = Color(0xff919191);
-  static const Color goldTextColor = Color(0xffFFBB5C);
-  static const Color silverTextColor = Color(0xff646464);
+  static const Color primaryTextColor = Color(0xff1f2937);
+  static const Color labelTextColor = Color(0xff4b5563);
+  static const Color secondaryTextColor = Color(0xff9ca3af);
+  static const Color goldTextColor = Color(0xfffbbf24);
+  static const Color silverTextColor = Color.fromARGB(255, 209, 209, 209);
   static const Color bronzeTextColor = Color(0xff905921);
+
+  //!Colors Snackbar
+  static const Color warningColor = Color(0xffdc2626);
 }
