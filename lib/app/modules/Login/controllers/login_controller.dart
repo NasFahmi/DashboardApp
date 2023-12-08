@@ -15,7 +15,8 @@ class LoginController extends GetxController {
   var loading = false.obs;
   // final SharedPreferences prefs = await SharedPreferences.getInstance();
   // final SharedPreferences prefs = await _prefs;
-  final formKey = GlobalKey<FormState>();
+
+  final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
 
   void toogleEye() {
     isObscure.toggle();
@@ -28,7 +29,7 @@ class LoginController extends GetxController {
 
   addToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('stringValue', loginInformation.data!.token!);
+    prefs.setString('token', loginInformation.data!.token!);
   }
 
   Future<void> authLogin() async {
@@ -36,9 +37,6 @@ class LoginController extends GetxController {
       'username': usernameController.text,
       'password': passwordController.text,
     };
-    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
-      Get.showSnackbar(snackBarLoginErrorsEmpty());
-    }
     try {
       loading.toggle();
       final response = await auth.authLogin(user);
@@ -46,7 +44,7 @@ class LoginController extends GetxController {
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.body;
         loginInformation = AuthLogin.fromJson(responseData); //success
-        // addToken();
+        addToken();
         // print(responseData);
         debugPrint(loginInformation.data?.token); //! can access token
         loading.toggle();

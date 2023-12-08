@@ -1,7 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -24,84 +23,91 @@ class LoginView extends GetView<LoginController> {
                 opacity: controller.loading.value ? 0.4 : 1.0,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Form(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gap(40),
-                        Center(
-                          child: Lottie.asset(
-                            'assets/images/animation/admin.json',
-                            width: 320.w,
-                          ),
-                        ),
-                        Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 32.sp,
-                            color: AppColors.primaryTextColor,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                        Text(
-                          'Login to continue using the app',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color: AppColors.secondaryTextColor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Gap(20.h),
-                        Text(
-                          'Username',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: AppColors.primaryTextColor,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Gap(8.h),
-                        usernameTextField(),
-                        Gap(16.h),
-                        Text(
-                          'Password',
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: AppColors.primaryTextColor,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Gap(8.h),
-                        Obx(() => passwordTextField()),
-                        Gap(16.h),
-                        GestureDetector(
-                          onTap: () {
-                            // Validate successful, proceed with login
-                            controller.authLogin();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 12.h),
-                            decoration: BoxDecoration(
-                              color: AppColors.blueColorPrimary,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(8.r),
-                              ),
+                  child: Obx(
+                    () => Form(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      key: controller.formKey.value,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Gap(40),
+                          Center(
+                            child: Lottie.asset(
+                              'assets/images/animation/admin.json',
+                              width: 320.w,
                             ),
-                            child: Center(
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
+                          ),
+                          Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 32.sp,
+                              color: AppColors.primaryTextColor,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Text(
+                            'Login to continue using the app',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: AppColors.secondaryTextColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Gap(20.h),
+                          Text(
+                            'Username',
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              color: AppColors.primaryTextColor,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Gap(4.h),
+                          usernameTextField(),
+                          Gap(2.h),
+                          Text(
+                            'Password',
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              color: AppColors.primaryTextColor,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Gap(4.h),
+                          Obx(() => passwordTextField()),
+                          Gap(16.h),
+                          GestureDetector(
+                            onTap: () {
+                              if (controller.formKey.value.currentState
+                                      ?.validate() ??
+                                  false) {
+                                controller.authLogin();
+                              }
+                              // Validate successful, proceed with login
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
+                              decoration: BoxDecoration(
+                                color: AppColors.blueColorPrimary,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(8.r),
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Gap(16.h),
-                      ],
+                          Gap(16.h),
+                        ],
+                      ),
                     ),
                   ),
                 ),

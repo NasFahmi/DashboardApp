@@ -1,14 +1,23 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './../models/api.dart';
 
 class AuthProvider extends GetConnect {
+  // Get Token
+  Future<String?> getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
+  }
+
   Future<Response> authLogin(Map data) =>
       post('${AppApi.BASEURL}${AppApi.loginUrl}', data);
 
-  Future<Response> postLogin(Map data) =>
-      post('http://localhost:8000/api/login', data);
-
-  // !test post
-  Future<Response> postTest(Map data) =>
-      post('https://jsonplaceholder.typicode.com/posts', data);
+  Future<Response> authLogout(String token) => get(
+        '${AppApi.BASEURL}${AppApi.logoutUrl}',
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json', // Add a comma here
+          'Authorization': 'Bearer ${token}',
+        },
+      );
 }
