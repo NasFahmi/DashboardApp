@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
@@ -5,6 +7,8 @@ import 'package:pawonkoe/app/data/providers/AuthProvider.dart';
 import 'package:pawonkoe/app/data/models/AuthModel.dart';
 import 'package:pawonkoe/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../data/models/api.dart';
 
 class LoginController extends GetxController {
   var isObscure = true.obs;
@@ -33,14 +37,16 @@ class LoginController extends GetxController {
   }
 
   Future<void> authLogin() async {
+    print('login prosess');
     Map<String, dynamic> user = {
       'username': usernameController.text,
       'password': passwordController.text,
     };
     try {
       loading.toggle();
-      final response = await auth.authLogin(user);
-
+      print('authing login');
+      print('${AppApi.BASEURL + AppApi.loginUrl}');
+      final response = await auth.authLogin(user).timeout(Duration(seconds: 5));
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.body;
         loginInformation = AuthLogin.fromJson(responseData); //success
@@ -49,12 +55,16 @@ class LoginController extends GetxController {
         debugPrint(loginInformation.data?.token); //! can access token
         loading.toggle();
         if (loginInformation.success == true) {
-          Get.offNamed(Routes.DASHBOARD);
+          Get.offNamed(Routes.HOME);
         }
       } else if (response.statusCode == 400) {
         loading.toggle();
         Get.showSnackbar(snackBarLoginErrors());
       }
+    } on TimeoutException {
+      // Handle timeout
+      loading.toggle();
+      Get.showSnackbar(snackBarTimeOut());
     } catch (e) {
       // print('error');
       return Future.error(e);

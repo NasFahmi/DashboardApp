@@ -7,7 +7,6 @@ class CardDashboard extends StatelessWidget {
   Color? backgroundCardColor;
   String? nameCard;
   String? valueCard;
-  String? dateCard;
   Icon? iconCard;
   Color? backgroundIconColor;
   CardDashboard(
@@ -16,7 +15,6 @@ class CardDashboard extends StatelessWidget {
       required this.iconCard,
       required this.nameCard,
       required this.valueCard,
-      required this.dateCard,
       super.key});
 
   @override
@@ -24,7 +22,9 @@ class CardDashboard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: backgroundCardColor,
-        borderRadius: BorderRadius.all(Radius.circular(16.r)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(16.r),
+        ),
       ),
       padding: EdgeInsets.all(16.w),
       child: Column(
@@ -47,25 +47,20 @@ class CardDashboard extends StatelessWidget {
           Gap(12.h),
           Text(
             nameCard!,
-            style:
-                TextStyle(color: AppColors.secondaryTextColor, fontSize: 20.sp),
+            style: TextStyle(
+              color: AppColors.labelTextColor,
+              fontSize: 14.sp,
+            ),
           ),
           Gap(10.h),
           Text(
             valueCard!,
             style: TextStyle(
               color: AppColors.primaryTextColor,
-              fontSize: 24.sp,
-              fontWeight: FontWeight.bold,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w800,
             ),
           ),
-          Gap(8.h),
-          Text(
-            dateCard!,
-            textAlign: TextAlign.end,
-            style:
-                TextStyle(color: AppColors.secondaryTextColor, fontSize: 12.sp),
-          )
         ],
       ),
     );

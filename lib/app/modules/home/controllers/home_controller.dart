@@ -16,16 +16,19 @@ class HomeController extends GetxController {
   ];
   @override
   void onInit() {
+    print('on init in home');
     super.onInit();
   }
 
   @override
   void onReady() {
+    print('on ready in home');
     super.onReady();
   }
 
   @override
   void onClose() {
+    print('on close in home');
     super.onClose();
   }
 }

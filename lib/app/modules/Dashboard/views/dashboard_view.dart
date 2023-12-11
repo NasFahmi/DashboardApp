@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:pawonkoe/app/theme/colors.dart';
 import 'package:pawonkoe/app/components/_card_dashboard.dart';
 import '../controllers/dashboard_controller.dart';
+import 'package:intl/intl.dart';
 
 class DashboardView extends GetView<DashboardController> {
   const DashboardView({Key? key}) : super(key: key);
@@ -20,15 +21,6 @@ class DashboardView extends GetView<DashboardController> {
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
-              backgroundColor: AppColors.blackColor,
-              maxRadius: 28.w,
-              minRadius: 28.w,
-              child: Icon(
-                FluentIcons.person_24_regular,
-                size: 28.sp,
-              ),
-            ),
             Gap(8.h),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +69,21 @@ class DashboardView extends GetView<DashboardController> {
         child: ListView(
           children: [
             Padding(
-              padding: EdgeInsets.all(16.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Obx(
+                () => Text(
+                  DateFormat('HH.mm dd MMMM yyyy')
+                      .format(controller.dateTime.value),
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: AppColors.primaryTextColor,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
               child: GridView.count(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -91,7 +97,6 @@ class DashboardView extends GetView<DashboardController> {
                     backgroundIconColor: AppColors.blueColorPrimary,
                     nameCard: 'Orders',
                     valueCard: '42 Orders',
-                    dateCard: '12 November 2023',
                   ),
                   CardDashboard(
                     iconCard: Icon(FluentIcons.currency_dollar_euro_20_regular),
@@ -99,7 +104,6 @@ class DashboardView extends GetView<DashboardController> {
                     backgroundIconColor: AppColors.redColorPrimary,
                     nameCard: 'Produk Terjual',
                     valueCard: '427 Produk',
-                    dateCard: '12 November 2023',
                   ),
                   CardDashboard(
                     iconCard: Icon(FluentIcons.data_trending_20_regular),
@@ -107,7 +111,6 @@ class DashboardView extends GetView<DashboardController> {
                     backgroundIconColor: AppColors.greenColorPrimary,
                     nameCard: 'Pendapatan',
                     valueCard: 'Rp. 150.000,-',
-                    dateCard: '12 November 2023',
                   ),
                   CardDashboard(
                     iconCard: Icon(FluentIcons.clock_24_regular),
@@ -115,7 +118,6 @@ class DashboardView extends GetView<DashboardController> {
                     backgroundIconColor: AppColors.yellowColorPrimary,
                     nameCard: 'PreOrder',
                     valueCard: '4 PreOrder',
-                    dateCard: '12 November 2023',
                   ),
                 ],
               ),

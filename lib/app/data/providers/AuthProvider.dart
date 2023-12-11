@@ -10,10 +10,13 @@ class AuthProvider extends GetConnect {
   }
 
   Future<Response> authLogin(Map data) =>
-      post('${AppApi.BASEURL}${AppApi.loginUrl}', data);
+      post('${AppApi.BASEURL + AppApi.loginUrl}', data);
+
+  // Future<Response> authLogin(Map data) =>
+  //     post('http://127.0.0.1:8000/api/login', data);
 
   Future<Response> authLogout(String token) => get(
-        '${AppApi.BASEURL}${AppApi.logoutUrl}',
+        '${AppApi.BASEURL + AppApi.logoutUrl}',
         headers: {
           'Content-type': 'application/json',
           'Accept': 'application/json', // Add a comma here
