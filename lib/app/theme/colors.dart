@@ -27,4 +27,7 @@ class AppColors {
 
   //!Colors Snackbar
   static const Color warningColor = Color(0xffdc2626);
+
+  //!COlors Card
+  static const Color cardColor = Color(0xffc2c2c2c2);
 }
