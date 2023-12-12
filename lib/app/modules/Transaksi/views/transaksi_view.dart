@@ -117,8 +117,8 @@ class TransaksiView extends GetView<TransaksiController> {
                         color: Colors.white12,
                       ),
                       padding: EdgeInsets.symmetric(
-                        horizontal: 16.0.w,
-                        vertical: 12.h,
+                        horizontal: 8.0.w,
+                        vertical: 8.h,
                       ),
                       margin: EdgeInsets.symmetric(vertical: 8.h),
                       child: Row(
