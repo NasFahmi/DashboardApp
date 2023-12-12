@@ -34,7 +34,7 @@ class ProdukView extends GetView<ProdukController> {
                     child: TextField(
                       style: TextStyle(fontSize: 14.sp),
                       decoration: InputDecoration(
-                        hintText: 'Search Product',
+                        hintText: 'Search a Product',
                         hintStyle: TextStyle(fontSize: 14.sp),
                         prefixIcon: Icon(
                           Icons.search,
@@ -72,7 +72,8 @@ class ProdukView extends GetView<ProdukController> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blueColorPrimary,
-                      fixedSize: Size(160.w, 40.h),
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      fixedSize: Size(140.w, 40.h),
                       foregroundColor: AppColors.backgroundColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
