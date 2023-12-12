@@ -91,33 +91,63 @@ class DashboardView extends GetView<DashboardController> {
                 mainAxisSpacing: 20,
                 crossAxisCount: 2,
                 children: <Widget>[
-                  CardDashboard(
-                    iconCard: Icon(FluentIcons.cart_24_regular),
-                    backgroundCardColor: AppColors.blueColorSecondary,
-                    backgroundIconColor: AppColors.blueColorPrimary,
-                    nameCard: 'Orders',
-                    valueCard: '42 Orders',
+                  Obx(
+                    () => CardDashboard(
+                      iconCard: Icon(FluentIcons.cart_24_regular),
+                      backgroundCardColor: AppColors.blueColorSecondary,
+                      backgroundIconColor: AppColors.blueColorPrimary,
+                      nameCard: 'Orders',
+                      valueCard:
+                          '${controller.dashboardData.value.data?.card?.totalOrder.toString()} Orders',
+                    ),
                   ),
-                  CardDashboard(
-                    iconCard: Icon(FluentIcons.currency_dollar_euro_20_regular),
-                    backgroundCardColor: AppColors.redColorSecoundary,
-                    backgroundIconColor: AppColors.redColorPrimary,
-                    nameCard: 'Produk Terjual',
-                    valueCard: '427 Produk',
+                  Obx(
+                    () => CardDashboard(
+                      iconCard:
+                          Icon(FluentIcons.currency_dollar_euro_20_regular),
+                      backgroundCardColor: AppColors.redColorSecoundary,
+                      backgroundIconColor: AppColors.redColorPrimary,
+                      nameCard: 'Produk Terjual',
+                      valueCard:
+                          '${controller.dashboardData.value.data?.card?.totalProductTerjual.toString()} Product',
+                    ),
                   ),
-                  CardDashboard(
-                    iconCard: Icon(FluentIcons.data_trending_20_regular),
-                    backgroundCardColor: AppColors.greenColorSecoundary,
-                    backgroundIconColor: AppColors.greenColorPrimary,
-                    nameCard: 'Pendapatan',
-                    valueCard: 'Rp. 150.000,-',
+                  Obx(
+                    () {
+                      String rawString = controller
+                              .dashboardData.value.data?.card?.totalPendapatan
+                              .toString() ??
+                          "0";
+
+                      // Mengonversi string ke dalam bentuk angka
+                      int numericValue = int.tryParse(
+                              rawString.replaceAll(RegExp(r'[^0-9]'), '')) ??
+                          0;
+
+                      // Membuat format angka dengan pemisah ribuan
+                      String formattedValue = NumberFormat.currency(
+                              locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0)
+                          .format(numericValue);
+
+                      // Tampilkan hasilnya
+                      return CardDashboard(
+                        iconCard: Icon(FluentIcons.data_trending_20_regular),
+                        backgroundCardColor: AppColors.greenColorSecoundary,
+                        backgroundIconColor: AppColors.greenColorPrimary,
+                        nameCard: 'Pendapatan',
+                        valueCard: formattedValue,
+                      );
+                    },
                   ),
-                  CardDashboard(
-                    iconCard: Icon(FluentIcons.clock_24_regular),
-                    backgroundCardColor: AppColors.yellowColorSecoundary,
-                    backgroundIconColor: AppColors.yellowColorPrimary,
-                    nameCard: 'PreOrder',
-                    valueCard: '4 PreOrder',
+                  Obx(
+                    () => CardDashboard(
+                      iconCard: Icon(FluentIcons.clock_24_regular),
+                      backgroundCardColor: AppColors.yellowColorSecoundary,
+                      backgroundIconColor: AppColors.yellowColorPrimary,
+                      nameCard: 'PreOrder',
+                      valueCard:
+                          '${controller.dashboardData.value.data?.card?.totalPreorder} Preorder',
+                    ),
                   ),
                 ],
               ),
@@ -157,57 +187,72 @@ class DashboardView extends GetView<DashboardController> {
               ),
             ),
             Gap(12.h),
-            SizedBox(
-              height: 140.h,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  if (index < 4) {
-                    return Container(
-                      width: 140.w,
-                      margin: EdgeInsets.only(left: 16.w),
-                      height: 140.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.backgroundColorSecoundary,
-                        shape: BoxShape.rectangle,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Center(
-                              child: Image(
-                                height: 60,
-                                image: AssetImage('assets/images/snack.png'),
-                              ),
-                            ),
-                            Gap(4.h),
-                            Text(
-                              'Produk A',
-                              style: TextStyle(fontSize: 12.sp),
-                            ),
-                          ],
+            Obx(() => SizedBox(
+                  height: 140.h,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount:
+                        controller.dashboardData.value.data?.product?.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: 140.w,
+                        margin: EdgeInsets.only(left: 16.w),
+                        height: 140.h,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundColorSecoundary,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16.r),
+                          ),
                         ),
-                      ),
-                    );
-                  } else {
-                    return Container(
-                      width: 100.w,
-                      margin: EdgeInsets.only(left: 16.w, right: 16.w),
-                      height: 140.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.redColorSecoundary,
-                        shape: BoxShape.rectangle,
-                      ),
-                      child: Center(child: Text("See All")),
-                    );
-                  }
-                },
-              ),
-            ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Obx(
+                                () => SizedBox(
+                                  height: 85.h,
+                                  width: 150.w,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    child: Image(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          '${controller.dashboardData.value.data?.product?[index].fotos?.first.url}'),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Gap(4.h),
+                              Obx(
+                                () => Text(
+                                  '${controller.dashboardData.value.data?.product?[index].namaProduct.toString()}',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppColors.primaryTextColor,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ),
+                              Obx(
+                                () => Text(
+                                  'Harga : ${controller.dashboardData.value.data?.product?[index].harga.toString()}',
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: AppColors.labelTextColor,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                )),
             Gap(20.h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -269,322 +314,48 @@ class DashboardView extends GetView<DashboardController> {
                       numeric: true,
                     ),
                   ],
-                  rows: <DataRow>[
-                    DataRow(
+                  rows: List<DataRow>.generate(
+                    controller.dashboardData.value.data?.topSalesProduct
+                            ?.length ??
+                        0,
+                    (index) => DataRow(
                       cells: <DataCell>[
                         DataCell(
                           Text(
-                            '1',
+                            (index + 1).toString(),
                             style: TextStyle(
-                              color: AppColors.goldTextColor,
+                              color: AppColors.primaryTextColor,
                               fontSize: 16.sp,
                             ),
                           ),
                         ),
                         DataCell(
-                          SizedBox(
-                            width: Get.width / 3.5,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.goldTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
+                          Obx(() => Text(
+                                controller.dashboardData.value.data
+                                        ?.topSalesProduct?[index]?.namaProduct
+                                        .toString() ??
+                                    '',
+                                style: TextStyle(
+                                  color: AppColors.primaryTextColor,
+                                  fontSize: 16.sp,
+                                ),
+                              )),
                         ),
                         DataCell(
-                          Text(
-                            '150',
-                            style: TextStyle(
-                              color: AppColors.goldTextColor,
-                              fontSize: 16.sp,
-                            ),
-                          ),
+                          Obx(() => Text(
+                                controller.dashboardData.value.data
+                                        ?.topSalesProduct?[index]?.terjual
+                                        .toString() ??
+                                    '',
+                                style: TextStyle(
+                                  color: AppColors.primaryTextColor,
+                                  fontSize: 16.sp,
+                                ),
+                              )),
                         ),
                       ],
                     ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '2',
-                          style: TextStyle(
-                            color: AppColors.silverTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.silverTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '100',
-                          style: TextStyle(
-                            color: AppColors.silverTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '3',
-                          style: TextStyle(
-                            color: AppColors.bronzeTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.bronzeTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '50',
-                          style: TextStyle(
-                            color: AppColors.bronzeTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '4',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.secondaryTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '50',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '5',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.secondaryTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '50',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '6',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.secondaryTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '50',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '7',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.secondaryTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '50',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '8',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.secondaryTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '50',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '9',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.secondaryTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '50',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text(
-                          '10',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                        DataCell(
-                          SizedBox(
-                            width: Get.width / 3,
-                            child: Text(
-                              'Cumi Bakar Varian Pedas diskon',
-                              style: TextStyle(
-                                color: AppColors.secondaryTextColor,
-                                fontSize: 16.sp,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(Text(
-                          '50',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        )),
-                      ],
-                    ),
-                  ],
+                  ),
                 ),
                 padding: EdgeInsets.all(16.w),
               ),

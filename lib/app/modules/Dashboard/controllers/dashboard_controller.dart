@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:pawonkoe/app/data/models/DashboardModel.dart';
 import 'package:pawonkoe/app/data/providers/DashboardProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 class DashboardController extends GetxController {
   DashboardProvider dashboardProvider = DashboardProvider();
-  Dashboard dashboardData = Dashboard();
+  Rx<Dashboard> dashboardData = Dashboard().obs;
 
   // DateTime dateTime = DateTime.now();
   Rx<DateTime> dateTime = DateTime.now().obs;
@@ -23,7 +23,7 @@ class DashboardController extends GetxController {
     print('oninit dashboard');
     Timer.periodic(Duration(seconds: 1), (timer) {
       dateTime.value = DateTime.now();
-      print(dateTime);
+      // print(dateTime);
       update(); // Notify the UI about the change
     });
     super.onInit();
@@ -56,8 +56,10 @@ class DashboardController extends GetxController {
         print('response 200 ok data Dashboard');
         Map<String, dynamic> responseData = response.body;
         print(responseData);
-        dashboardData = Dashboard.fromJson(responseData); //success
-        print('sample foto ${dashboardData.data?.product?[0].fotos?[0].url}');
+        dashboardData.value = Dashboard.fromJson(responseData); //success
+        print(
+            'sample foto ${dashboardData.value.data?.product?[0].fotos?[0].url}');
+        print(dashboardData.value.data?.product?.length);
       }
     } catch (e) {
       return Future.error(e);
