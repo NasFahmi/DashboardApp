@@ -1,13 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateProductController extends GetxController {
   //TODO: Implement CreateProductController
-  Map<String, bool> beratJenis = {
-    'Kecil': false,
-    'Sedang': false,
-    'Berat': false,
-    'Sangat Berat': false,
-  }.obs;
+  final TextEditingController namaProduct = TextEditingController();
+  final TextEditingController harga = TextEditingController();
+  final TextEditingController beratJenis = TextEditingController();
+  final TextEditingController deskripsi = TextEditingController();
+  final TextEditingController linkShopee = TextEditingController();
+  final TextEditingController stok = TextEditingController();
+  List<TextEditingController> varianControllers = [TextEditingController()].obs;
   final count = 0.obs;
   @override
   void onInit() {

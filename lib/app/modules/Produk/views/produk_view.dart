@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:pawonkoe/app/routes/app_pages.dart';
 import 'package:pawonkoe/app/theme/colors.dart';
 
 import '../controllers/produk_controller.dart';
@@ -82,7 +83,9 @@ class ProdukView extends GetView<ProdukController> {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.CREATE_PRODUCT);
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

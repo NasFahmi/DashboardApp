@@ -14,13 +14,7 @@ class CreateProductView extends GetView<CreateProductController> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController namaProduct = TextEditingController();
-    final TextEditingController hargaRendah = TextEditingController();
-    final TextEditingController hargaTinggi = TextEditingController();
-    final TextEditingController deskripsi = TextEditingController();
-    final TextEditingController linkShopee = TextEditingController();
-    final TextEditingController stok = TextEditingController();
-    final TextEditingController spesifikasi = TextEditingController();
+    // final TextEditingController spesifikasi = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -47,10 +41,10 @@ class CreateProductView extends GetView<CreateProductController> {
                   ),
                   Gap(4),
                   TextFormFieldComponent(
-                    controllerForm: namaProduct,
+                    controllerForm: controller.namaProduct,
                     validationForm: 'Nama Product Tidak Boleh Kosong',
                     hintTextField: 'Nama Product',
-                    // regex: RegExp(r'^[a-zA-Z0-9]+$'),
+                    regex: RegExp(r'^[a-zA-Z0-9]+$'),
                   ),
                   Text(
                     'Harga',
@@ -58,29 +52,11 @@ class CreateProductView extends GetView<CreateProductController> {
                     style: TextStyle(),
                   ),
                   Gap(4),
-                  SizedBox(
-                    width: Get.width * 1,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextFormFieldComponent(
-                            controllerForm: hargaRendah,
-                            validationForm: 'Harga Tidak Boleh Kosong',
-                            hintTextField: 'Harga Rendah',
-                            // regex: RegExp(r'^[0-9]*$'),
-                          ),
-                        ),
-                        Gap(8),
-                        Expanded(
-                          child: TextFormFieldComponent(
-                            controllerForm: hargaTinggi,
-                            validationForm: 'Harga Tidak Boleh Kosong',
-                            hintTextField: 'Harga Tinggi',
-                            // regex: RegExp(r'^[0-9]*$'),
-                          ),
-                        ),
-                      ],
-                    ),
+                  TextFormFieldComponent(
+                    controllerForm: controller.harga,
+                    validationForm: 'Harga Tidak Boleh Kosong',
+                    hintTextField: 'Harga Product',
+                    regex: RegExp(r'^[0-9]*$'),
                   ),
                   Text(
                     'Deskripsi',
@@ -90,8 +66,9 @@ class CreateProductView extends GetView<CreateProductController> {
                   Gap(4),
                   TextFormFieldComponent(
                     validationForm: 'Derksipsi Tidak Boleh Kosong',
-                    controllerForm: deskripsi,
+                    controllerForm: controller.deskripsi,
                     hintTextField: 'Deskripsi',
+                    regex: RegExp(r'^[a-zA-Z0-9]+$'),
                   ),
                   Text(
                     'Link Shopee',
@@ -101,8 +78,9 @@ class CreateProductView extends GetView<CreateProductController> {
                   Gap(4),
                   TextFormFieldComponent(
                     validationForm: 'Link Shopee Tidak Boleh Kosong',
-                    controllerForm: linkShopee,
+                    controllerForm: controller.linkShopee,
                     hintTextField: 'Link Shopee',
+                    regex: RegExp(r'^[a-zA-Z0-9]+$'),
                   ),
                   Text(
                     'Stok',
@@ -112,29 +90,123 @@ class CreateProductView extends GetView<CreateProductController> {
                   Gap(4),
                   TextFormFieldComponent(
                     validationForm: 'Stok Tidak Boleh Kosong',
-                    controllerForm: stok,
+                    controllerForm: controller.stok,
                     hintTextField: 'Stok',
+                    regex: RegExp(r'^[a-zA-Z0-9]+$'),
                   ),
-                  ListView(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: controller.beratJenis.keys.map((String e) {
-                      return Obx(
-                        () => CheckboxListTile(
-                          title: Text(e),
-                          value: controller.beratJenis[e]!,
-                          onChanged: (bool? value) {
-                            controller.beratJenis[e] = value!;
-                          },
+                  Text(
+                    'Berat',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(),
+                  ),
+                  Gap(4),
+                  TextFormFieldComponent(
+                    controllerForm: controller.beratJenis,
+                    validationForm: 'Berat jenis Tidak Boleh Kosong',
+                    hintTextField: 'Berat jenis Product',
+                    regex: RegExp(r'^[0-9]*$'),
+                  ),
+                  Gap(4),
+                  Text('Varian'),
+                  Gap(4),
+                  Obx(
+                    () => ListView.builder(
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      itemCount: controller.varianControllers.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                Obx(
+                                  () => Expanded(
+                                    child: Container(
+                                      child: TextFormFieldComponent(
+                                        validationForm:
+                                            'Varian ${index + 1} tidak boleh kosong',
+                                        controllerForm:
+                                            controller.varianControllers[index],
+                                        hintTextField: 'Varian ${index + 1}',
+                                        regex: RegExp(r'^[a-zA-Z0-9]+$'),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Gap(8.w),
+                                IconButton(
+                                  onPressed: () {
+                                    if (controller.varianControllers.length >
+                                        1) {
+                                      controller.varianControllers
+                                          .removeAt(index);
+                                      print(
+                                          controller.varianControllers.length);
+                                    }
+                                  },
+                                  icon: Icon(
+                                    FluentIcons.delete_24_regular,
+                                  ),
+                                  color: AppColors.redColorPrimary,
+                                )
+                              ],
+                            ),
+                            Divider()
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  Gap(8),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.greenColorPrimary,
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      fixedSize: Size(140.w, 40.h),
+                      foregroundColor: AppColors.backgroundColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.r),
                         ),
-                      );
-                    }).toList(),
-                    // Mengurangi margin antara CheckboxListTile
-                    padding: EdgeInsets.zero,
-                    // Menyesuaikan padding untuk isi dari ListTile
-                    // Ini akan mengurangi margin internal dari CheckboxListTile
-                    itemExtent: 40, // Ubah nilai ini sesuai kebutuhan
+                      ),
+                    ),
+                    onPressed: () {
+                      controller.varianControllers.add(TextEditingController());
+                      print(controller.varianControllers.length);
+                    },
+                    child: Text('Tambah Varian'),
                   ),
+                  Gap(16),
+                  GestureDetector(
+                    onTap: () {
+                      // if (controller.formKey.currentState?.validate() ??
+                      //     false) {
+                      //   // All form fields are valid, proceed with submission
+                      //   // You may want to call a function here to handle submission
+                      // }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.blueColorPrimary,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.r),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Gap(16),
                 ],
               ),
             ),

@@ -7,12 +7,12 @@ class TextFormFieldComponent extends StatelessWidget {
   final String? validationForm;
   final TextEditingController? controllerForm;
   final String? hintTextField;
-  // RegExp regex = RegExp(r'^[a-zA-Z0-9]+$');
+  RegExp? regex;
   TextFormFieldComponent(
       {required this.validationForm,
       required this.controllerForm,
       required this.hintTextField,
-      // required this.regex,
+      required this.regex,
       super.key});
 
   @override
@@ -25,7 +25,7 @@ class TextFormFieldComponent extends StatelessWidget {
         return null;
       },
       inputFormatters: [
-        // FilteringTextInputFormatter.allow(regex),
+        FilteringTextInputFormatter.allow(regex!),
       ],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controllerForm,
