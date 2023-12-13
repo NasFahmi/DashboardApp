@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:pawonkoe/app/modules/Dashboard/views/dashboard_view.dart';
 import 'package:pawonkoe/app/modules/NotesPreOrder/views/notes_pre_order_view.dart';
 import 'package:pawonkoe/app/modules/Produk/views/produk_view.dart';
+import 'package:pawonkoe/app/modules/Transaksi/controllers/transaksi_controller.dart';
 import 'package:pawonkoe/app/modules/Transaksi/views/transaksi_view.dart';
 
 class HomeController extends GetxController {

@@ -11,6 +11,7 @@ class ProdukView extends GetView<ProdukController> {
   const ProdukView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.find<ProdukController>().refresh();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -106,101 +107,109 @@ class ProdukView extends GetView<ProdukController> {
             Expanded(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: GridView.count(
-                  childAspectRatio: 10 / 12,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12.h,
-                  crossAxisSpacing: 12.w,
-                  children: List.generate(
-                    10, // Number of items in the grid
-                    (index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white38,
-                          shape: BoxShape.rectangle,
-                          //
-                          border: Border.all(
-                            color: AppColors.cardColor,
-                            width: 2,
-                            style: BorderStyle.solid,
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    print('refresh');
+                    controller.getdata();
+                  },
+                  child: GridView.count(
+                    childAspectRatio: 10 / 12,
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 12.h,
+                    crossAxisSpacing: 12.w,
+                    children: List.generate(
+                      10, // Number of items in the grid
+                      (index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white38,
+                            shape: BoxShape.rectangle,
+                            //
+                            border: Border.all(
+                              color: AppColors.cardColor,
+                              width: 2,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(12.r),
+                            ),
                           ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12.r),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.w, vertical: 8.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Center(
-                                child: SizedBox(
-                                  width: Get.width / 2.25,
-                                  height: 100.h,
-                                  // color: Colors.amber,
-                                  // alignment: Alignment.center,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    child: Image(
-                                      fit: BoxFit.cover,
-                                      image:
-                                          AssetImage('assets/images/test.jpg'),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8.w, vertical: 8.h),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Center(
+                                  child: SizedBox(
+                                    width: Get.width / 2.25,
+                                    height: 100.h,
+                                    // color: Colors.amber,
+                                    // alignment: Alignment.center,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      child: Image(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            'assets/images/test.jpg'),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              // Gap(4.h),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Product A',
-                                      style: TextStyle(
-                                          color: AppColors.primaryTextColor,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    Text(
-                                      maxLines: 2,
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  ',
-                                      style: TextStyle(
-                                        color: AppColors.labelTextColor,
-                                        fontSize: 10.sp,
+                                // Gap(4.h),
+                                Container(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Product A',
+                                        style: TextStyle(
+                                            color: AppColors.primaryTextColor,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w800),
                                       ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Gap(4.h),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Rp 15.000',
-                                          style: TextStyle(
-                                              fontSize: 14.sp,
-                                              color: AppColors.primaryTextColor,
-                                              fontWeight: FontWeight.w600),
+                                      Text(
+                                        maxLines: 2,
+                                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  ',
+                                        style: TextStyle(
+                                          color: AppColors.labelTextColor,
+                                          fontSize: 10.sp,
                                         ),
-                                        Text(
-                                          'Stok : 120',
-                                          style: TextStyle(
-                                            fontSize: 10.sp,
-                                            color: AppColors.labelTextColor,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Gap(4.h),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Rp 15.000',
+                                            style: TextStyle(
+                                                fontSize: 14.sp,
+                                                color:
+                                                    AppColors.primaryTextColor,
+                                                fontWeight: FontWeight.w600),
                                           ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
+                                          Text(
+                                            'Stok : 120',
+                                            style: TextStyle(
+                                              fontSize: 10.sp,
+                                              color: AppColors.labelTextColor,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),

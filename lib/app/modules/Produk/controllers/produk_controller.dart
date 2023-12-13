@@ -14,6 +14,7 @@ class ProdukController extends GetxController {
   void onReady() {
     print('onReady product');
     super.onReady();
+    getdata();
   }
 
   @override
@@ -23,4 +24,8 @@ class ProdukController extends GetxController {
   }
 
   void increment() => count.value++;
+  Future<void> getdata() async {
+    await Future.delayed(Duration(seconds: 1)); // contoh penundaan 1 detik
+    print('fetching');
+  }
 }

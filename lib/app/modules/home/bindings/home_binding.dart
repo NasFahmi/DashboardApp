@@ -12,9 +12,21 @@ class HomeBinding extends Bindings {
     Get.lazyPut<HomeController>(
       () => HomeController(),
     );
-    Get.put<ProdukController>(ProdukController());
-    Get.put<TransaksiController>(TransaksiController());
-    Get.put<NotesPreOrderController>(NotesPreOrderController());
-    Get.put<DashboardController>(DashboardController());
+    Get.lazyPut<TransaksiController>(
+      () => TransaksiController(),
+    );
+
+    Get.lazyPut<ProdukController>(
+      () => ProdukController(),
+    );
+    // Get.put<TransaksiController>(TransaksiController());
+    Get.lazyPut<NotesPreOrderController>(
+      () => NotesPreOrderController(),
+    );
+    // Get.put<NotesPreOrderController>(NotesPreOrderController());
+    Get.lazyPut<DashboardController>(
+      () => DashboardController(),
+    );
+    // Get.put<DashboardController>(DashboardController());
   }
 }
