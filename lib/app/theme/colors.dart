@@ -6,6 +6,7 @@ class AppColors {
   static const Color blueColorSecondary = Color(0xFF93c5fd);
   static const Color redColorPrimary = Color(0xffdc2626);
   static const Color redColorSecoundary = Color(0xfffca5a5);
+  static const Color orangeColorPrimary = Color(0xffFF8A00);
   static const Color greenColorPrimary = Color(0xff16a34a);
   static const Color greenColorSecoundary = Color(0xff86efac);
   static const Color yellowColorPrimary = Color(0xffca8a04);
@@ -27,4 +28,7 @@ class AppColors {
 
   //!Colors Snackbar
   static const Color warningColor = Color(0xffdc2626);
+
+  //!COlors Card
+  static const Color cardColor = Color(0xffc2c2c2c2);
 }

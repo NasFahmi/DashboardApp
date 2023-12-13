@@ -54,12 +54,15 @@ class DashboardController extends GetxController {
       print('success fecth Data Dashboard');
       if (response.statusCode == 200) {
         print('response 200 ok data Dashboard');
+        print(response.body);
         Map<String, dynamic> responseData = response.body;
         print(responseData);
         dashboardData.value = Dashboard.fromJson(responseData); //success
         print(
             'sample foto ${dashboardData.value.data?.product?[0].fotos?[0].url}');
         print(dashboardData.value.data?.product?.length);
+      } else {
+        print(response.statusCode);
       }
     } catch (e) {
       return Future.error(e);
