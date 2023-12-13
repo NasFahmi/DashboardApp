@@ -134,92 +134,67 @@ class NotesPreOrderView extends GetView<NotesPreOrderController> {
                           children: [
                             Row(
                               children: [
-                                SizedBox(
-                                  width: Get.width / 3.5,
-                                  height: 80.h,
-                                  // color: Colors.amber,
-                                  // alignment: Alignment.center,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    child: Image(
-                                      fit: BoxFit.cover,
-                                      image:
-                                          AssetImage('assets/images/test.jpg'),
-                                    ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
                                   ),
-                                ),
-                                Gap(8.h),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Product A',
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w800,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Product A',
+                                        style: TextStyle(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w800,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'Jhone Doe',
-                                      style: TextStyle(
+                                      Text(
+                                        'Jhone Doe',
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        'Total Harga : ',
+                                        style: TextStyle(
                                           fontSize: 12.sp,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'Total Harga : ',
-                                      style: TextStyle(
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Down Payment : ',
-                                      style: TextStyle(
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    Gap(12),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(4.r),
-                                            ),
-                                            color: AppColors.orangeColorPrimary,
-                                          ),
-                                          padding: EdgeInsets.all(4.w),
-                                          child: Text(
-                                            '20',
-                                            style: TextStyle(
-                                                color:
-                                                    AppColors.backgroundColor,
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w700),
-                                          ),
+                                          fontWeight: FontWeight.w400,
                                         ),
-                                        Gap(8),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(4.r),
-                                            ),
-                                            color: AppColors.redColorPrimary,
-                                          ),
-                                          padding: EdgeInsets.all(4.w),
-                                          child: Text(
-                                            'Belum Selesai',
-                                            style: TextStyle(
-                                                color:
-                                                    AppColors.backgroundColor,
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w700),
-                                          ),
+                                      ),
+                                      Text(
+                                        'Down Payment : ',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w400,
                                         ),
-                                      ],
-                                    )
-                                  ],
+                                      ),
+                                      Gap(8.h),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(4.r),
+                                              ),
+                                              color:
+                                                  AppColors.orangeColorPrimary,
+                                            ),
+                                            padding: EdgeInsets.all(4.w),
+                                            child: Text(
+                                              '20',
+                                              style: TextStyle(
+                                                  color:
+                                                      AppColors.backgroundColor,
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ),
+                                          Gap(8),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -230,7 +205,7 @@ class NotesPreOrderView extends GetView<NotesPreOrderController> {
                                 GestureDetector(
                                   child: Icon(Icons.more_vert),
                                 ),
-                                Gap(32.h),
+                                Gap(40.h),
                                 Text(
                                   '2023-09-20',
                                   style: TextStyle(fontSize: 12.sp),
