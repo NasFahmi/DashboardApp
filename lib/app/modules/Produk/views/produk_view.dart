@@ -29,7 +29,7 @@ class ProdukView extends GetView<ProdukController> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
                   Expanded(
@@ -74,7 +74,7 @@ class ProdukView extends GetView<ProdukController> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blueColorPrimary,
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       fixedSize: Size(140.w, 40.h),
                       foregroundColor: AppColors.backgroundColor,
                       shape: RoundedRectangleBorder(
@@ -109,7 +109,7 @@ class ProdukView extends GetView<ProdukController> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: RefreshIndicator(
                   onRefresh: () async {
                     print('refresh');
@@ -121,7 +121,8 @@ class ProdukView extends GetView<ProdukController> {
                     mainAxisSpacing: 12.h,
                     crossAxisSpacing: 12.w,
                     children: List.generate(
-                      10, // Number of items in the grid
+                      controller.productList.value.data!
+                          .length, // Number of items in the grid
                       (index) {
                         return Container(
                           decoration: BoxDecoration(
@@ -154,8 +155,10 @@ class ProdukView extends GetView<ProdukController> {
                                       borderRadius: BorderRadius.circular(8.r),
                                       child: Image(
                                         fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/test.jpg'),
+                                        // dashboardData.value.data?.product?[0].fotos?[0].url
+                                        // controller.dashboardData.value.data?.product?[index].fotos?.first.url
+                                        image: NetworkImage(
+                                            '${controller.productList.value.data![index].fotos?[0].url}'),
                                       ),
                                     ),
                                   ),
@@ -167,7 +170,10 @@ class ProdukView extends GetView<ProdukController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Product A',
+                                        controller.productList.value
+                                                .data?[index].namaProduct
+                                                ?.toString() ??
+                                            '',
                                         style: TextStyle(
                                             color: AppColors.primaryTextColor,
                                             fontSize: 16.sp,
@@ -175,7 +181,10 @@ class ProdukView extends GetView<ProdukController> {
                                       ),
                                       Text(
                                         maxLines: 2,
-                                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  ',
+                                        controller.productList.value
+                                                .data?[index].deskripsi
+                                                .toString() ??
+                                            '',
                                         style: TextStyle(
                                           color: AppColors.labelTextColor,
                                           fontSize: 10.sp,
@@ -188,7 +197,7 @@ class ProdukView extends GetView<ProdukController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'Rp 15.000',
+                                            'Rp ${controller.productList.value.data?[index].hargaRendah.toString() ?? ''}',
                                             style: TextStyle(
                                                 fontSize: 14.sp,
                                                 color:
@@ -196,7 +205,7 @@ class ProdukView extends GetView<ProdukController> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                           Text(
-                                            'Stok : 120',
+                                            'Stok ${controller.productList.value.data?[index].stok.toString() ?? ''}',
                                             style: TextStyle(
                                               fontSize: 10.sp,
                                               color: AppColors.labelTextColor,

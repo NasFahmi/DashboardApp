@@ -1,10 +1,12 @@
-class Product {
+import 'package:pawonkoe/app/data/models/api.dart';
+
+class ProductList {
   bool? success;
   List<Data>? data;
 
-  Product({this.success, this.data});
+  ProductList({this.success, this.data});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  ProductList.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
       data = <Data>[];
@@ -110,7 +112,7 @@ class Fotos {
 
   Fotos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    url = json['url'];
+    url = json['url'] != null ? '${AppApi.PATHIMAGE}/${json['url']}' : null;
   }
 
   Map<String, dynamic> toJson() {
