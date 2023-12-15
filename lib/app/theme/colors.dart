@@ -31,4 +31,6 @@ class AppColors {
 
   //!COlors Card
   static const Color cardColor = Color(0xffc2c2c2c2);
+
+  static const Color BackDataChart = Color.fromARGB(255, 228, 243, 255);
 }

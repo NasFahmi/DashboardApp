@@ -34,7 +34,7 @@ class LoginView extends GetView<LoginController> {
                           Center(
                             child: Lottie.asset(
                               'assets/images/animation/admin.json',
-                              width: 320.w,
+                              width: 200.w,
                             ),
                           ),
                           Text(

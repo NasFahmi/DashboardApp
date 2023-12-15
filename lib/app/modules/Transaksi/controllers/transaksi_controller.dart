@@ -4,6 +4,14 @@ class TransaksiController extends GetxController {
   //TODO: Implement TransaksiController
 
   final count = 0.obs;
+  List<int> dataSixBar = [
+    500000,
+    800000,
+    300000,
+    400000,
+    350000,
+    750000,
+  ].obs;
   @override
   void onInit() {
     print('onInit transaksi');
