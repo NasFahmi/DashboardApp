@@ -4,8 +4,6 @@ import '../modules/Dashboard/bindings/dashboard_binding.dart';
 import '../modules/Dashboard/views/dashboard_view.dart';
 import '../modules/Login/bindings/login_binding.dart';
 import '../modules/Login/views/login_view.dart';
-import '../modules/NotesPreOrder/bindings/notes_pre_order_binding.dart';
-import '../modules/NotesPreOrder/views/notes_pre_order_view.dart';
 import '../modules/OnBoard/bindings/on_board_binding.dart';
 import '../modules/OnBoard/views/on_board_view.dart';
 import '../modules/Produk/bindings/produk_binding.dart';
@@ -43,11 +41,6 @@ class AppPages {
       name: _Paths.TRANSAKSI,
       page: () => const TransaksiView(),
       binding: TransaksiBinding(),
-    ),
-    GetPage(
-      name: _Paths.NOTES_PRE_ORDER,
-      page: () => const NotesPreOrderView(),
-      binding: NotesPreOrderBinding(),
     ),
     GetPage(
       name: _Paths.DASHBOARD,
