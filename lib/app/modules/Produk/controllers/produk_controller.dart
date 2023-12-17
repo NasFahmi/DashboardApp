@@ -39,6 +39,7 @@ class ProdukController extends GetxController {
         Map<String, dynamic> responseData = response.body;
         print(responseData);
         productInformation.value = ListProduct.fromJson(responseData);
+        print(productInformation.value.data?[0].harga);
       } else {
         print(response.statusCode);
       }

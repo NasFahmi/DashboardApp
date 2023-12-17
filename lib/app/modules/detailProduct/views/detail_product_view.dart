@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:pawonkoe/app/routes/app_pages.dart';
 import 'package:pawonkoe/app/theme/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,6 +14,7 @@ class DetailProductView extends GetView<DetailProductController> {
   const DetailProductView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.find<DetailProductController>().refresh();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
@@ -84,7 +86,9 @@ class DetailProductView extends GetView<DetailProductController> {
         color: Colors.white,
       ),
       child: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.offAndToNamed(Routes.HOME);
+        },
         icon: const Icon(FluentIcons.arrow_left_24_regular),
       ),
     );

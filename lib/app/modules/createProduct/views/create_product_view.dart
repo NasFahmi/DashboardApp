@@ -167,7 +167,8 @@ class CreateProductView extends GetView<CreateProductController> {
                     Gap(8),
                     controller.images.isNotEmpty
                         ? Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
                             child: GridView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
@@ -186,8 +187,8 @@ class CreateProductView extends GetView<CreateProductController> {
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(12)),
                                       child: Image(
-                                        width: 100,
-                                        height: 100,
+                                        width: 100.w,
+                                        height: 100.w,
                                         fit: BoxFit.cover,
                                         image: FileImage(
                                           controller.images[index],
@@ -198,10 +199,10 @@ class CreateProductView extends GetView<CreateProductController> {
                                       top: -10,
                                       right: -10,
                                       child: Container(
-                                        width: 24,
-                                        height: 24,
+                                        width: 24.w,
+                                        height: 24.h,
                                         decoration: BoxDecoration(
-                                          color: AppColors.blueColorThird,
+                                          color: AppColors.redColorThirdy,
                                           shape: BoxShape.circle,
                                         ),
                                         child: InkWell(
@@ -209,9 +210,9 @@ class CreateProductView extends GetView<CreateProductController> {
                                             controller.images.removeAt(index);
                                           },
                                           child: Icon(
-                                            size: 18,
-                                            Icons.delete,
-                                            color: Colors.red,
+                                            FluentIcons.delete_24_regular,
+                                            size: 14.sp,
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ),

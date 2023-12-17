@@ -1,112 +1,73 @@
+import 'package:pawonkoe/app/data/models/api.dart';
+
 class ListProduct {
   bool? success;
-  Data? data;
+  List<Data>? data;
 
   ListProduct({this.success, this.data});
 
   ListProduct.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['success'] = this.success;
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Data {
-  Card? card;
-  List<Product>? product;
-  List<TopSalesProduct>? topSalesProduct;
-
-  Data({this.card, this.product, this.topSalesProduct});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    card = json['card'] != null ? new Card.fromJson(json['card']) : null;
-    if (json['product'] != null) {
-      product = <Product>[];
-      json['product'].forEach((v) {
-        product!.add(new Product.fromJson(v));
-      });
-    }
-    if (json['top_sales_product'] != null) {
-      topSalesProduct = <TopSalesProduct>[];
-      json['top_sales_product'].forEach((v) {
-        topSalesProduct!.add(new TopSalesProduct.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.card != null) {
-      data['card'] = this.card!.toJson();
-    }
-    if (this.product != null) {
-      data['product'] = this.product!.map((v) => v.toJson()).toList();
-    }
-    if (this.topSalesProduct != null) {
-      data['top_sales_product'] =
-          this.topSalesProduct!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Card {
-  int? totalOrder;
-  String? totalPendapatan;
-  String? totalProductTerjual;
-  String? totalPreorder;
-
-  Card(
-      {this.totalOrder,
-      this.totalPendapatan,
-      this.totalProductTerjual,
-      this.totalPreorder});
-
-  Card.fromJson(Map<String, dynamic> json) {
-    totalOrder = json['total_order'];
-    totalPendapatan = json['total_pendapatan'];
-    totalProductTerjual = json['total_product_terjual'];
-    totalPreorder = json['total_preorder'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['total_order'] = this.totalOrder;
-    data['total_pendapatan'] = this.totalPendapatan;
-    data['total_product_terjual'] = this.totalProductTerjual;
-    data['total_preorder'] = this.totalPreorder;
-    return data;
-  }
-}
-
-class Product {
   int? id;
   String? namaProduct;
   String? harga;
-  List<Fotos>? fotos;
   String? deskripsi;
+  String? linkShopee;
+  String? stok;
+  String? spesifikasiProduct;
+  List<Fotos>? fotos;
+  List<Varians>? varians;
 
-  Product({this.id, this.namaProduct, this.harga, this.fotos, this.deskripsi});
+  Data(
+      {this.id,
+      this.namaProduct,
+      this.harga,
+      this.deskripsi,
+      this.linkShopee,
+      this.stok,
+      this.spesifikasiProduct,
+      this.fotos,
+      this.varians});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     namaProduct = json['nama_product'];
     harga = json['harga'];
+    deskripsi = json['deskripsi'];
+    linkShopee = json['link_shopee'];
+    stok = json['stok'];
+    spesifikasiProduct = json['spesifikasi_product'];
     if (json['fotos'] != null) {
       fotos = <Fotos>[];
       json['fotos'].forEach((v) {
         fotos!.add(new Fotos.fromJson(v));
       });
     }
-    deskripsi = json['deskripsi'];
+    if (json['varians'] != null) {
+      varians = <Varians>[];
+      json['varians'].forEach((v) {
+        varians!.add(new Varians.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -114,10 +75,16 @@ class Product {
     data['id'] = this.id;
     data['nama_product'] = this.namaProduct;
     data['harga'] = this.harga;
+    data['deskripsi'] = this.deskripsi;
+    data['link_shopee'] = this.linkShopee;
+    data['stok'] = this.stok;
+    data['spesifikasi_product'] = this.spesifikasiProduct;
     if (this.fotos != null) {
       data['fotos'] = this.fotos!.map((v) => v.toJson()).toList();
     }
-    data['deskripsi'] = this.deskripsi;
+    if (this.varians != null) {
+      data['varians'] = this.varians!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -130,7 +97,7 @@ class Fotos {
 
   Fotos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    url = json['url'];
+    url = json['url'] != null ? '${AppApi.PATHIMAGE}/${json['url']}' : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -141,21 +108,21 @@ class Fotos {
   }
 }
 
-class TopSalesProduct {
-  String? namaProduct;
-  String? terjual;
+class Varians {
+  int? id;
+  String? jenisVarian;
 
-  TopSalesProduct({this.namaProduct, this.terjual});
+  Varians({this.id, this.jenisVarian});
 
-  TopSalesProduct.fromJson(Map<String, dynamic> json) {
-    namaProduct = json['nama_product'];
-    terjual = json['terjual'];
+  Varians.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    jenisVarian = json['jenis_varian'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['nama_product'] = this.namaProduct;
-    data['terjual'] = this.terjual;
+    data['id'] = this.id;
+    data['jenis_varian'] = this.jenisVarian;
     return data;
   }
 }
