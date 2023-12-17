@@ -218,23 +218,43 @@ Container ContentDetails() {
             ),
           ),
           Gap(4),
-          if (controller.productDetailInformation.value.data?.varians != null)
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: controller
-                  .productDetailInformation.value.data!.varians!.length,
-              itemBuilder: (context, index) {
-                // Use ListTile with a Divider
-                return Text(
-                  '${controller.productDetailInformation.value.data?.varians?[index].jenisVarian ?? " "}',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: AppColors.labelTextColor,
-                  ),
-                );
-              },
+          Obx(
+            () => Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                controller
+                        .productDetailInformation.value.data?.varians?.length ??
+                    0,
+                (index) {
+                  return Text(
+                    '${controller.productDetailInformation.value.data?.varians?[index].jenisVarian ?? ''}',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: AppColors.labelTextColor,
+                    ),
+                  );
+                },
+              ).toList(), // Convert the List<Text> to List<Widget>
             ),
+          ),
+          // if (controller.productDetailInformation.value.data?.varians != null)
+          //   ListView.builder(
+          //     shrinkWrap: true,
+          //     physics: NeverScrollableScrollPhysics(),
+          //     itemCount: controller
+          //         .productDetailInformation.value.data?.varians?.length,
+          //     itemBuilder: (context, index) {
+          //       // Use ListTile with a Divider
+          //       return Text(
+          //         '${controller.productDetailInformation.value.data?.varians?[index].jenisVarian ?? ''}',
+          //         style: TextStyle(
+          //           fontSize: 16.sp,
+          //           color: AppColors.labelTextColor,
+          //         ),
+          //       );
+          //     },
+          //   ),
         ],
       ),
     ),

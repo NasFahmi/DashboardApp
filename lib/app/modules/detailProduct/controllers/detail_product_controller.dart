@@ -37,6 +37,8 @@ class DetailProductController extends GetxController {
         Map<String, dynamic> responseData = response.body;
         productDetailInformation.value = ProductDetail.fromJson(responseData);
         print(productDetailInformation.value.data?.fotos?.first.url);
+        print(productDetailInformation.value.data?.varians?.length);
+        print(productDetailInformation.value.data?.varians?[0].jenisVarian);
       }
     } catch (e) {}
   }
