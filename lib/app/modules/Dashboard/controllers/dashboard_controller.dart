@@ -59,6 +59,7 @@ class DashboardController extends GetxController {
         Map<String, dynamic> responseData = response.body;
         print(responseData);
         dashboardData.value = Dashboard.fromJson(responseData); //success
+        update();
         print(
             'sample foto ${dashboardData.value.data?.product?[0].fotos?[0].url}');
         print(dashboardData.value.data?.product?[1].fotos?.first.url);
