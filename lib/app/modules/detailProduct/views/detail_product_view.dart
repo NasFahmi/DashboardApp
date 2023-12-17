@@ -18,13 +18,22 @@ class DetailProductView extends GetView<DetailProductController> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              ProductPreview(),
-              AppBarCostum(),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SingleChildScrollView(
+              child: Stack(
+                children: [
+                  ProductPreview(),
+                  AppBarCostum(),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+              child: shopeeButton(controller),
+            ),
+          ],
         ),
       ),
     );
@@ -96,32 +105,39 @@ class DetailProductView extends GetView<DetailProductController> {
 }
 
 Column ProductPreview() {
-  List<String> list = [
-    'assets/images/test.jpg',
-    'assets/images/test.jpg',
-    'assets/images/test.jpg',
-    'assets/images/test.jpg',
-    'assets/images/test.jpg'
-  ];
+  final DetailProductController controller = Get.find();
+  // List<String> list = [
+  //   'assets/images/test.jpg',
+  //   'assets/images/test.jpg',
+  //   'assets/images/test.jpg',
+  //   'assets/images/test.jpg',
+  //   'assets/images/test.jpg'
+  // ];
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Container(
-        child: CarouselSlider(
-          options: CarouselOptions(
-            aspectRatio: 10 / 9,
-            enableInfiniteScroll: true,
-          ),
-          items: list
-              .map(
-                (e) => ClipRRect(
-                  child: Image(
-                    fit: BoxFit.cover,
-                    image: AssetImage(e),
+      Obx(
+        () => Container(
+          child: CarouselSlider(
+            options: CarouselOptions(
+              aspectRatio: 10 / 9,
+              enableInfiniteScroll: true,
+            ),
+            items: (controller.productDetailInformation.value.data?.fotos ?? [])
+                .map(
+                  (e) => ClipRRect(
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image: e.url != null
+                          ? NetworkImage(e.url!)
+                          : AssetImage('assets/images/image_default.png')
+                              as ImageProvider<Object>,
+                      // Ensure that the image provider is explicitly cast to ImageProvider<Object>
+                    ),
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ),
         ),
       ),
       ContentDetails()
@@ -130,6 +146,7 @@ Column ProductPreview() {
 }
 
 Container ContentDetails() {
+  final DetailProductController controller = Get.find();
   return Container(
     decoration: BoxDecoration(
       color: AppColors.backgroundColor,
@@ -139,31 +156,37 @@ Container ContentDetails() {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Product A",
-            style: TextStyle(
-              fontSize: 24.sp,
-              color: AppColors.primaryTextColor,
-              fontWeight: FontWeight.w800,
+          Obx(
+            () => Text(
+              "${controller.productDetailInformation.value.data?.namaProduct ?? " "}",
+              style: TextStyle(
+                fontSize: 24.sp,
+                color: AppColors.primaryTextColor,
+                fontWeight: FontWeight.w800,
+              ),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Rp. 10.000',
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.shopeeColor,
+              Obx(
+                () => Text(
+                  'Rp. ${controller.productDetailInformation.value.data?.harga ?? "0"}',
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.shopeeColor,
+                  ),
                 ),
               ),
-              Text(
-                'Stok 120',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.secondaryTextColor,
+              Obx(
+                () => Text(
+                  'Stok ${controller.productDetailInformation.value.data?.stok ?? "0"}',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.secondaryTextColor,
+                  ),
                 ),
               ),
             ],
@@ -177,10 +200,12 @@ Container ContentDetails() {
             ),
           ),
           Gap(8),
-          Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-            style: TextStyle(
-              color: AppColors.labelTextColor,
+          Obx(
+            () => Text(
+              '${controller.productDetailInformation.value.data?.deskripsi ?? "0"}',
+              style: TextStyle(
+                color: AppColors.labelTextColor,
+              ),
             ),
           ),
           Gap(8),
@@ -193,57 +218,67 @@ Container ContentDetails() {
             ),
           ),
           Gap(4),
-          ...List.generate(
-            3,
-            (index) => Text(
-              'Varian ${index + 1}',
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: AppColors.labelTextColor,
-              ),
-            ),
-          ),
-          Gap(40),
-          ElevatedButton(
-            onPressed: () async {
-              const url = 'https://blog.logrocket.com';
-              if (await canLaunch(url)) {
-                await launch(url);
-              } else {
-                throw 'Could not launch $url';
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(Get.width, 42.h),
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8.r),
-                ),
-              ),
-              foregroundColor: Colors.white,
-              backgroundColor: AppColors.shopeeColor,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image(
-                  width: 20,
-                  image: AssetImage('assets/images/shopee_logo.png'),
-                ),
-                Gap(16),
-                Text(
-                  'Shopee',
+          if (controller.productDetailInformation.value.data?.varians != null)
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: controller
+                  .productDetailInformation.value.data!.varians!.length,
+              itemBuilder: (context, index) {
+                // Use ListTile with a Divider
+                return Text(
+                  '${controller.productDetailInformation.value.data?.varians?[index].jenisVarian ?? " "}',
                   style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 14.sp,
+                    color: AppColors.labelTextColor,
                   ),
-                ),
-              ],
+                );
+              },
             ),
-          )
         ],
       ),
+    ),
+  );
+}
+
+ElevatedButton shopeeButton(DetailProductController controller) {
+  return ElevatedButton(
+    onPressed: () async {
+      String url =
+          '${controller.productDetailInformation.value.data?.linkShopee}';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    },
+    style: ElevatedButton.styleFrom(
+      fixedSize: Size(Get.width, 42.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(8.r),
+        ),
+      ),
+      foregroundColor: Colors.white,
+      backgroundColor: AppColors.shopeeColor,
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Image(
+          width: 20,
+          image: AssetImage('assets/images/shopee_logo.png'),
+        ),
+        Gap(16),
+        Text(
+          'Shopee',
+          style: TextStyle(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
     ),
   );
 }

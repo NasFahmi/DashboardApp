@@ -20,7 +20,7 @@ class TransaksiView extends GetView<TransaksiController> {
           style: TextStyle(
             color: AppColors.primaryTextColor,
             fontWeight: FontWeight.w800,
-            fontSize: 20,
+            fontSize: 20.sp,
           ),
         ),
       ),
@@ -33,8 +33,22 @@ class TransaksiView extends GetView<TransaksiController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Pendapatan Bulan ini'),
-                  Gap(16),
+                  Text(
+                    'Pendapatan 30 Hari Terakhir',
+                    style: TextStyle(
+                      color: AppColors.primaryTextColor,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Text(
+                    '*Setiap Bar mewakili 5 hari',
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      color: AppColors.labelTextColor,
+                    ),
+                  ),
+                  Gap(20),
                   SizedBox(
                     height: 160.h,
                     child: BarDataPendapatan(),
@@ -44,7 +58,7 @@ class TransaksiView extends GetView<TransaksiController> {
             ),
             Gap(16.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text('List Transaksi'),
             ),
             Gap(8),
@@ -57,11 +71,11 @@ class TransaksiView extends GetView<TransaksiController> {
                   itemCount: 5,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            width: 2,
+                            width: 2.w,
                             color: AppColors.silverTextColor,
                           ),
                           borderRadius: BorderRadius.all(

@@ -6,4 +6,8 @@ class ProductProvider extends GetConnect {
         '${AppApi.BASEURL + AppApi.listproduct}',
         headers: {'Accept': 'application/json'},
       );
+  Future<Response> getProductById(int id) => get(
+        '${AppApi.BASEURL + AppApi.listproduct}/${id}',
+        headers: {'Accept': 'application/json'},
+      );
 }

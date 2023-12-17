@@ -226,8 +226,21 @@ class DashboardView extends GetView<DashboardController> {
                                       borderRadius: BorderRadius.circular(8.r),
                                       child: Image(
                                         fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            '${controller.dashboardData.value.data?.product?[index].fotos?.first.url}'),
+                                        image: controller
+                                                    .dashboardData
+                                                    .value
+                                                    .data
+                                                    ?.product?[index]
+                                                    .fotos
+                                                    ?.first
+                                                    .url !=
+                                                null
+                                            ? NetworkImage(
+                                                '${controller.dashboardData.value.data?.product?[index].fotos?.first.url}')
+                                            : AssetImage(
+                                                    'assets/images/image_default.png')
+                                                as ImageProvider<Object>,
+                                        // Ensure that the image provider is explicitly cast to ImageProvider<Object>
                                       ),
                                     ),
                                   ),
@@ -296,7 +309,7 @@ class DashboardView extends GetView<DashboardController> {
               ),
               Gap(12.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
@@ -364,7 +377,6 @@ class DashboardView extends GetView<DashboardController> {
                       ),
                     ),
                   ),
-                  padding: EdgeInsets.all(16.w),
                 ),
               ),
               Gap(16.h)
