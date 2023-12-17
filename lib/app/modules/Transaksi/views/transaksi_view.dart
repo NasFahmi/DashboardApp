@@ -42,7 +42,7 @@ class TransaksiView extends GetView<TransaksiController> {
                 ],
               ),
             ),
-            Gap(20.h),
+            Gap(16.h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text('List Transaksi'),
@@ -108,17 +108,17 @@ class TransaksiView extends GetView<TransaksiController> {
                                     Text(
                                       'Jhone Doe',
                                       style: TextStyle(
-                                          fontSize: 12.sp,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w600),
                                     ),
                                     Text(
                                       'Total Harga : 20.000',
                                       style: TextStyle(
-                                        fontSize: 10.sp,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    Gap(16),
+                                    Gap(12),
                                     Row(
                                       children: [
                                         Container(

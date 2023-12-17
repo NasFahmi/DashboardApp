@@ -1,103 +1,123 @@
-class Product {
+class ListProduct {
   bool? success;
-  List<Data>? data;
+  Data? data;
 
-  Product({this.success, this.data});
+  ListProduct({this.success, this.data});
 
-  Product.fromJson(Map<String, dynamic> json) {
+  ListProduct.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['success'] = this.success;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
 }
 
 class Data {
-  int? id;
-  String? namaProduct;
-  String? hargaRendah;
-  String? hargaTinggi;
-  String? deskripsi;
-  String? linkShopee;
-  String? stok;
-  String? spesifikasiProduct;
-  List<Fotos>? fotos;
-  List<Varians>? varians;
-  List<BeratJenis>? beratJenis;
+  Card? card;
+  List<Product>? product;
+  List<TopSalesProduct>? topSalesProduct;
 
-  Data(
-      {this.id,
-      this.namaProduct,
-      this.hargaRendah,
-      this.hargaTinggi,
-      this.deskripsi,
-      this.linkShopee,
-      this.stok,
-      this.spesifikasiProduct,
-      this.fotos,
-      this.varians,
-      this.beratJenis});
+  Data({this.card, this.product, this.topSalesProduct});
 
   Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    namaProduct = json['nama_product'];
-    hargaRendah = json['harga_rendah'];
-    hargaTinggi = json['harga_tinggi'];
-    deskripsi = json['deskripsi'];
-    linkShopee = json['link_shopee'];
-    stok = json['stok'];
-    spesifikasiProduct = json['spesifikasi_product'];
-    if (json['fotos'] != null) {
-      fotos = <Fotos>[];
-      json['fotos'].forEach((v) {
-        fotos!.add(new Fotos.fromJson(v));
+    card = json['card'] != null ? new Card.fromJson(json['card']) : null;
+    if (json['product'] != null) {
+      product = <Product>[];
+      json['product'].forEach((v) {
+        product!.add(new Product.fromJson(v));
       });
     }
-    if (json['varians'] != null) {
-      varians = <Varians>[];
-      json['varians'].forEach((v) {
-        varians!.add(new Varians.fromJson(v));
-      });
-    }
-    if (json['berat_jenis'] != null) {
-      beratJenis = <BeratJenis>[];
-      json['berat_jenis'].forEach((v) {
-        beratJenis!.add(new BeratJenis.fromJson(v));
+    if (json['top_sales_product'] != null) {
+      topSalesProduct = <TopSalesProduct>[];
+      json['top_sales_product'].forEach((v) {
+        topSalesProduct!.add(new TopSalesProduct.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.card != null) {
+      data['card'] = this.card!.toJson();
+    }
+    if (this.product != null) {
+      data['product'] = this.product!.map((v) => v.toJson()).toList();
+    }
+    if (this.topSalesProduct != null) {
+      data['top_sales_product'] =
+          this.topSalesProduct!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Card {
+  int? totalOrder;
+  String? totalPendapatan;
+  String? totalProductTerjual;
+  String? totalPreorder;
+
+  Card(
+      {this.totalOrder,
+      this.totalPendapatan,
+      this.totalProductTerjual,
+      this.totalPreorder});
+
+  Card.fromJson(Map<String, dynamic> json) {
+    totalOrder = json['total_order'];
+    totalPendapatan = json['total_pendapatan'];
+    totalProductTerjual = json['total_product_terjual'];
+    totalPreorder = json['total_preorder'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['total_order'] = this.totalOrder;
+    data['total_pendapatan'] = this.totalPendapatan;
+    data['total_product_terjual'] = this.totalProductTerjual;
+    data['total_preorder'] = this.totalPreorder;
+    return data;
+  }
+}
+
+class Product {
+  int? id;
+  String? namaProduct;
+  String? harga;
+  List<Fotos>? fotos;
+  String? deskripsi;
+
+  Product({this.id, this.namaProduct, this.harga, this.fotos, this.deskripsi});
+
+  Product.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    namaProduct = json['nama_product'];
+    harga = json['harga'];
+    if (json['fotos'] != null) {
+      fotos = <Fotos>[];
+      json['fotos'].forEach((v) {
+        fotos!.add(new Fotos.fromJson(v));
+      });
+    }
+    deskripsi = json['deskripsi'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['nama_product'] = this.namaProduct;
-    data['harga_rendah'] = this.hargaRendah;
-    data['harga_tinggi'] = this.hargaTinggi;
-    data['deskripsi'] = this.deskripsi;
-    data['link_shopee'] = this.linkShopee;
-    data['stok'] = this.stok;
-    data['spesifikasi_product'] = this.spesifikasiProduct;
+    data['harga'] = this.harga;
     if (this.fotos != null) {
       data['fotos'] = this.fotos!.map((v) => v.toJson()).toList();
     }
-    if (this.varians != null) {
-      data['varians'] = this.varians!.map((v) => v.toJson()).toList();
-    }
-    if (this.beratJenis != null) {
-      data['berat_jenis'] = this.beratJenis!.map((v) => v.toJson()).toList();
-    }
+    data['deskripsi'] = this.deskripsi;
     return data;
   }
 }
@@ -121,40 +141,21 @@ class Fotos {
   }
 }
 
-class Varians {
-  int? id;
-  String? jenisVarian;
+class TopSalesProduct {
+  String? namaProduct;
+  String? terjual;
 
-  Varians({this.id, this.jenisVarian});
+  TopSalesProduct({this.namaProduct, this.terjual});
 
-  Varians.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    jenisVarian = json['jenis_varian'];
+  TopSalesProduct.fromJson(Map<String, dynamic> json) {
+    namaProduct = json['nama_product'];
+    terjual = json['terjual'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['jenis_varian'] = this.jenisVarian;
-    return data;
-  }
-}
-
-class BeratJenis {
-  int? id;
-  String? beratJenis;
-
-  BeratJenis({this.id, this.beratJenis});
-
-  BeratJenis.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    beratJenis = json['berat_jenis'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['berat_jenis'] = this.beratJenis;
+    data['nama_product'] = this.namaProduct;
+    data['terjual'] = this.terjual;
     return data;
   }
 }

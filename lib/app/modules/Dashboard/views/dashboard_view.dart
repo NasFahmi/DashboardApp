@@ -227,7 +227,8 @@ class DashboardView extends GetView<DashboardController> {
                                       child: Image(
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
-                                            '${controller.dashboardData.value.data?.product?[index].fotos?.first.url}'),
+                                            '${controller.dashboardData.value.data?.product?[index].fotos?.first.url}'
+                                            ' '),
                                       ),
                                     ),
                                   ),

@@ -14,8 +14,9 @@ void main() {
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         theme: ThemeData(
-            textTheme: GoogleFonts.plusJakartaSansTextTheme(
-                Theme.of(context).textTheme)),
+          textTheme:
+              GoogleFonts.plusJakartaSansTextTheme(Theme.of(context).textTheme),
+        ),
       ),
     ),
   );

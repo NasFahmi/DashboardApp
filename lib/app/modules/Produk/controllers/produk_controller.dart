@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
+import 'package:pawonkoe/app/data/models/ProductModel.dart';
+import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
 
 class ProdukController extends GetxController {
-  //TODO: Implement ProdukController
+  ProductProvider productProvider = ProductProvider();
+  Rx<ListProduct> productInformation = ListProduct().obs;
 
   final count = 0.obs;
   @override
@@ -14,7 +17,7 @@ class ProdukController extends GetxController {
   void onReady() {
     print('onReady product');
     super.onReady();
-    getdata();
+    getdataListProduct();
   }
 
   @override
@@ -24,8 +27,21 @@ class ProdukController extends GetxController {
   }
 
   void increment() => count.value++;
-  Future<void> getdata() async {
-    await Future.delayed(Duration(seconds: 1)); // contoh penundaan 1 detik
-    print('fetching');
+  Future<void> getdataListProduct() async {
+    print('get data List Product');
+    try {
+      print('fecth api list product');
+      final response = await productProvider.getListProduct();
+      print('after fecth api');
+      if (response.statusCode == 200) {
+        print('success fecth api');
+        print(response.body);
+        Map<String, dynamic> responseData = response.body;
+        print(responseData);
+        productInformation.value = ListProduct.fromJson(responseData);
+      } else {
+        print(response.statusCode);
+      }
+    } catch (e) {}
   }
 }

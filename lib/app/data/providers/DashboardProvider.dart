@@ -10,7 +10,8 @@ class DashboardProvider extends GetConnect {
     return token = prefs.getString('token');
   }
 
-  Future<Response> getDashboardData() =>
-      get('${AppApi.BASEURL + AppApi.dashboard}',
-          headers: {'Accept': 'application/json'});
+  Future<Response> getDashboardData() => get(
+        '${AppApi.BASEURL + AppApi.dashboard}',
+        headers: {'Accept': 'application/json'},
+      );
 }

@@ -113,7 +113,7 @@ class ProdukView extends GetView<ProdukController> {
                 child: RefreshIndicator(
                   onRefresh: () async {
                     print('refresh');
-                    controller.getdata();
+                    controller.getdataListProduct();
                   },
                   child: GridView.count(
                     childAspectRatio: 10 / 12,

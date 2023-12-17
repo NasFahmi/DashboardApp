@@ -21,7 +21,44 @@ class BarDataPendapatan extends StatelessWidget {
         titlesData: FlTitlesData(
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
-              showTitles: false,
+              showTitles: true,
+              reservedSize: 28,
+              getTitlesWidget: (value, meta) {
+                switch (value.toInt()) {
+                  case 1:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('1-5'),
+                    );
+                  case 2:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('6-10'),
+                    );
+                  case 3:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('11-15'),
+                    );
+                  case 4:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('16-20'),
+                    );
+                  case 5:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('21-25'),
+                    );
+                  case 6:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('26-30'),
+                    );
+                  default:
+                    return Text('');
+                }
+              },
             ),
           ),
           topTitles: AxisTitles(
