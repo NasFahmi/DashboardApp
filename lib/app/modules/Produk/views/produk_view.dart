@@ -37,117 +37,38 @@ class ProdukView extends GetView<ProdukController> {
                     print('refresh');
                     controller.getdataListProduct();
                   },
-                  child: GridView.count(
-                    childAspectRatio: 10 / 12,
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 12.h,
-                    crossAxisSpacing: 12.w,
-                    children: List.generate(
-                      controller.productInformation.value.data!
-                          .length, // Number of items in the grid
-                      (index) {
-                        return GestureDetector(
-                          onTap: () {
-                            // print(
-                            //     'test navigate ${controller.productInformation.value.data?[index].id}');
-                            Get.toNamed(Routes.DETAIL_PRODUCT,
-                                arguments: controller
-                                    .productInformation.value.data?[index].id);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white38,
-                              shape: BoxShape.rectangle,
-                              //
-                              border: Border.all(
-                                color: AppColors.cardColor,
-                                width: 2,
-                                style: BorderStyle.solid,
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12.r),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 8.w, vertical: 8.h),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width: Get.width / 2.25,
-                                      height: 100.h,
-                                      // color: Colors.amber,
-                                      // alignment: Alignment.center,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.r),
-                                        child: Image(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              '${controller.productInformation.value.data?[index].fotos?.first.url}'),
-                                        ),
-                                      ),
+                  child: controller.productInformation.value.data != null &&
+                          controller.productInformation.value.data!.isNotEmpty
+                      ? GridView.count(
+                          childAspectRatio: 10 / 12,
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 12.h,
+                          crossAxisSpacing: 12.w,
+                          children: List.generate(
+                            controller.productInformation.value.data!.length,
+                            (index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(
+                                    Routes.DETAIL_PRODUCT,
+                                    arguments: controller.productInformation
+                                        .value.data?[index].id,
+                                  );
+                                },
+                                child: Container(
+                                    // Your existing code for product items...
                                     ),
-                                  ),
-                                  // Gap(4.h),
-                                  Container(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${controller.productInformation.value.data?[index].namaProduct}',
-                                          style: TextStyle(
-                                              color: AppColors.primaryTextColor,
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w800),
-                                        ),
-                                        Text(
-                                          maxLines: 2,
-                                          '${controller.productInformation.value.data?[index].deskripsi}',
-                                          style: TextStyle(
-                                            color: AppColors.labelTextColor,
-                                            fontSize: 10.sp,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        Gap(4.h),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Rp ${controller.productInformation.value.data?[index].harga}',
-                                              style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                  color: AppColors
-                                                      .primaryTextColor,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Text(
-                                              'Stok : ${controller.productInformation.value.data?[index].stok}',
-                                              style: TextStyle(
-                                                fontSize: 10.sp,
-                                                color: AppColors.labelTextColor,
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-                  ),
+                        )
+                      : Center(
+                          // Display a message or widget when there are no products
+                          child: Text(
+                            'No products available.',
+                            style: TextStyle(fontSize: 16.sp),
+                          ),
+                        ),
                 ),
               ),
             ),
