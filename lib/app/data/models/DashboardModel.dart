@@ -62,9 +62,9 @@ class Data {
 
 class Card {
   int? totalOrder;
-  String? totalPendapatan;
-  String? totalProductTerjual;
-  String? totalPreorder;
+  dynamic totalPendapatan;
+  dynamic totalProductTerjual;
+  dynamic totalPreorder;
 
   Card(
       {this.totalOrder,
