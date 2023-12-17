@@ -34,7 +34,7 @@ class TextFormFieldComponent extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(16.0),
         filled: true,
-        fillColor: Colors.white60,
+        fillColor: Color.fromARGB(255, 245, 245, 245),
         hintText: hintTextField,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(
