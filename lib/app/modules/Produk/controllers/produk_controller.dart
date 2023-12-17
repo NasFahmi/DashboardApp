@@ -4,7 +4,9 @@ import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
 
 class ProdukController extends GetxController {
   ProductProvider productProvider = ProductProvider();
-  Rx<ProductList> productList = ProductList().obs;
+  Rx<ListProduct> productInformation = ListProduct().obs;
+
+  final count = 0.obs;
   @override
   void onInit() {
     print('onInit product');
@@ -15,7 +17,7 @@ class ProdukController extends GetxController {
   void onReady() {
     print('onReady product');
     super.onReady();
-    getdata();
+    getdataListProduct();
   }
 
   @override
@@ -24,24 +26,23 @@ class ProdukController extends GetxController {
     super.onClose();
   }
 
-  Future<void> getdata() async {
+  void increment() => count.value++;
+  Future<void> getdataListProduct() async {
+    print('get data List Product');
     try {
-      print('fecth Data product');
+      print('fecth api list product');
       final response = await productProvider.getListProduct();
-      print('success fecth Data product');
+      print('after fecth api');
       if (response.statusCode == 200) {
-        print('response 200 ok data product');
+        print('success fecth api');
         print(response.body);
         Map<String, dynamic> responseData = response.body;
         print(responseData);
-        productList.value = ProductList.fromJson(responseData);
-        // print('test product information = ${productList.value.data?.length}');
-        print(
-            'test product image information = ${productList.value.data?[0].fotos?[0].url}');
-        update();
+        productInformation.value = ListProduct.fromJson(responseData);
+        print(productInformation.value.data?[0].harga);
+      } else {
+        print(response.statusCode);
       }
-    } catch (e) {
-      Future.error(e);
-    }
+    } catch (e) {}
   }
 }

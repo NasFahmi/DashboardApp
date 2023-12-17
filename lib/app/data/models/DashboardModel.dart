@@ -62,9 +62,9 @@ class Data {
 
 class Card {
   int? totalOrder;
-  int? totalPendapatan;
-  int? totalProductTerjual;
-  int? totalPreorder;
+  String? totalPendapatan;
+  String? totalProductTerjual;
+  String? totalPreorder;
 
   Card(
       {this.totalOrder,
@@ -74,9 +74,9 @@ class Card {
 
   Card.fromJson(Map<String, dynamic> json) {
     totalOrder = json['total_order'];
-    totalPendapatan = int.parse(json['total_pendapatan']);
-    totalProductTerjual = int.parse(json['total_product_terjual']);
-    totalPreorder = int.parse(json['total_preorder']);
+    totalPendapatan = json['total_pendapatan'];
+    totalProductTerjual = json['total_product_terjual'];
+    totalPreorder = json['total_preorder'];
   }
 
   Map<String, dynamic> toJson() {

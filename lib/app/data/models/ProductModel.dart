@@ -1,12 +1,12 @@
 import 'package:pawonkoe/app/data/models/api.dart';
 
-class ProductList {
+class ListProduct {
   bool? success;
   List<Data>? data;
 
-  ProductList({this.success, this.data});
+  ListProduct({this.success, this.data});
 
-  ProductList.fromJson(Map<String, dynamic> json) {
+  ListProduct.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
       data = <Data>[];
@@ -29,34 +29,29 @@ class ProductList {
 class Data {
   int? id;
   String? namaProduct;
-  String? hargaRendah;
-  String? hargaTinggi;
+  String? harga;
   String? deskripsi;
   String? linkShopee;
   String? stok;
   String? spesifikasiProduct;
   List<Fotos>? fotos;
   List<Varians>? varians;
-  List<BeratJenis>? beratJenis;
 
   Data(
       {this.id,
       this.namaProduct,
-      this.hargaRendah,
-      this.hargaTinggi,
+      this.harga,
       this.deskripsi,
       this.linkShopee,
       this.stok,
       this.spesifikasiProduct,
       this.fotos,
-      this.varians,
-      this.beratJenis});
+      this.varians});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     namaProduct = json['nama_product'];
-    hargaRendah = json['harga_rendah'];
-    hargaTinggi = json['harga_tinggi'];
+    harga = json['harga'];
     deskripsi = json['deskripsi'];
     linkShopee = json['link_shopee'];
     stok = json['stok'];
@@ -73,20 +68,13 @@ class Data {
         varians!.add(new Varians.fromJson(v));
       });
     }
-    if (json['berat_jenis'] != null) {
-      beratJenis = <BeratJenis>[];
-      json['berat_jenis'].forEach((v) {
-        beratJenis!.add(new BeratJenis.fromJson(v));
-      });
-    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['nama_product'] = this.namaProduct;
-    data['harga_rendah'] = this.hargaRendah;
-    data['harga_tinggi'] = this.hargaTinggi;
+    data['harga'] = this.harga;
     data['deskripsi'] = this.deskripsi;
     data['link_shopee'] = this.linkShopee;
     data['stok'] = this.stok;
@@ -96,9 +84,6 @@ class Data {
     }
     if (this.varians != null) {
       data['varians'] = this.varians!.map((v) => v.toJson()).toList();
-    }
-    if (this.beratJenis != null) {
-      data['berat_jenis'] = this.beratJenis!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -138,25 +123,6 @@ class Varians {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['jenis_varian'] = this.jenisVarian;
-    return data;
-  }
-}
-
-class BeratJenis {
-  int? id;
-  String? beratJenis;
-
-  BeratJenis({this.id, this.beratJenis});
-
-  BeratJenis.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    beratJenis = json['berat_jenis'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['berat_jenis'] = this.beratJenis;
     return data;
   }
 }

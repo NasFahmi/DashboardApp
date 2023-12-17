@@ -53,11 +53,6 @@ class HomeView extends GetView<HomeController> {
                 gap: 8,
                 text: 'Transaksi',
               ),
-              GButton(
-                icon: FluentIcons.book_16_regular,
-                text: 'Notes',
-                gap: 8,
-              ),
             ],
           ),
         ),

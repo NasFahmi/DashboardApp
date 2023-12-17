@@ -4,11 +4,14 @@ class AppColors {
   // !Main Color
   static const Color blueColorPrimary = Color(0xFF2563eb);
   static const Color blueColorSecondary = Color(0xFF93c5fd);
+  static const Color blueColorThird = Color(0xff38bdf8);
   static const Color redColorPrimary = Color(0xffdc2626);
   static const Color redColorSecoundary = Color(0xfffca5a5);
+  static const Color redColorThirdy = Color(0xfff87171);
   static const Color orangeColorPrimary = Color(0xffFF8A00);
   static const Color greenColorPrimary = Color(0xff16a34a);
   static const Color greenColorSecoundary = Color(0xff86efac);
+  static const Color greenThird = Color(0xff34d399);
   static const Color yellowColorPrimary = Color(0xffca8a04);
   static const Color yellowColorSecoundary = Color(0xfffde047);
   static const Color blackColor = Color(0xff0F172A);
@@ -31,4 +34,7 @@ class AppColors {
 
   //!COlors Card
   static const Color cardColor = Color(0xffc2c2c2c2);
+
+  static const Color BackDataChart = Color.fromARGB(255, 228, 243, 255);
+  static const Color shopeeColor = Color(0xffee4d2d);
 }

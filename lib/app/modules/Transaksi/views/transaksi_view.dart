@@ -1,7 +1,9 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:pawonkoe/app/modules/Transaksi/views/barchart/barPendapatan.dart';
 import 'package:pawonkoe/app/theme/colors.dart';
 
 import '../controllers/transaksi_controller.dart';
@@ -14,7 +16,7 @@ class TransaksiView extends GetView<TransaksiController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'List Transaksi',
+          'Pendapatan & Transaksi',
           style: TextStyle(
             color: AppColors.primaryTextColor,
             fontWeight: FontWeight.w800,
@@ -24,84 +26,28 @@ class TransaksiView extends GetView<TransaksiController> {
       ),
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: TextField(
-                      style: TextStyle(fontSize: 14.sp),
-                      decoration: InputDecoration(
-                        hintText: 'Search a name or product',
-                        hintStyle: TextStyle(fontSize: 14.sp),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          size: 20.sp,
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 1.0.h, horizontal: 15.0),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 2.r,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 2.w,
-                            color: AppColors.silverTextColor,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.r),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 2.w,
-                            color: AppColors.blueColorPrimary,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8.r),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Gap(8.w),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.blueColorPrimary,
-                      fixedSize: Size(140.w, 40.h),
-                      foregroundColor: AppColors.backgroundColor,
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8.r),
-                        ),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Add Transaksi',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                        Icon(
-                          Icons.add,
-                          size: 20.sp,
-                          color: AppColors.backgroundColor,
-                        ),
-                      ],
-                    ),
+                  Text('Pendapatan Bulan ini'),
+                  Gap(16),
+                  SizedBox(
+                    height: 160.h,
+                    child: BarDataPendapatan(),
                   ),
                 ],
               ),
             ),
+            Gap(16.h),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text('List Transaksi'),
+            ),
+            Gap(8),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () async {
@@ -130,6 +76,7 @@ class TransaksiView extends GetView<TransaksiController> {
                         margin: EdgeInsets.symmetric(vertical: 8.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Row(
                               children: [
@@ -161,17 +108,17 @@ class TransaksiView extends GetView<TransaksiController> {
                                     Text(
                                       'Jhone Doe',
                                       style: TextStyle(
-                                          fontSize: 12.sp,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w600),
                                     ),
                                     Text(
-                                      'Total Harga',
+                                      'Total Harga : 20.000',
                                       style: TextStyle(
-                                        fontSize: 10.sp,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    Gap(16),
+                                    Gap(12),
                                     Row(
                                       children: [
                                         Container(
@@ -231,20 +178,10 @@ class TransaksiView extends GetView<TransaksiController> {
                                 ),
                               ],
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GestureDetector(
-                                  child: Icon(Icons.more_vert),
-                                ),
-                                Gap(32.h),
-                                Text(
-                                  '2023-09-20',
-                                  style: TextStyle(fontSize: 12.sp),
-                                ),
-                              ],
-                            )
+                            Text(
+                              '2023-09-20',
+                              style: TextStyle(fontSize: 12.sp),
+                            ),
                           ],
                         ),
                       ),

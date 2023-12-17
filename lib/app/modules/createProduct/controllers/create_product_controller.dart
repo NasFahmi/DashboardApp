@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pawonkoe/app/modules/createProduct/controllers/image_helper.dart';
 
 class CreateProductController extends GetxController {
   //TODO: Implement CreateProductController
@@ -11,6 +14,10 @@ class CreateProductController extends GetxController {
   final TextEditingController stok = TextEditingController();
   List<TextEditingController> varianControllers = [TextEditingController()].obs;
   final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
+
+  ImageHelper imageHelper = ImageHelper();
+  RxList images = [].obs;
+  var singleImage;
 
   final count = 0.obs;
   @override
