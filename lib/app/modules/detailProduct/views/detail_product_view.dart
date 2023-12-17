@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:pawonkoe/app/theme/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/detail_product_controller.dart';
 
@@ -119,52 +120,126 @@ Column ProductPreview() {
               .toList(),
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Product A"),
-            Text('Rp. 10.000'),
-            Text('Deskripsi'),
-            Text('Stok 120'),
-            Text('Varian'),
-            ...List.generate(3, (index) => Text('${index}')),
-            Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8.r),
+      ContentDetails()
+    ],
+  );
+}
+
+Container ContentDetails() {
+  return Container(
+    decoration: BoxDecoration(
+      color: AppColors.backgroundColor,
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Product A",
+            style: TextStyle(
+              fontSize: 24.sp,
+              color: AppColors.primaryTextColor,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Rp. 10.000',
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.shopeeColor,
+                ),
+              ),
+              Text(
+                'Stok 120',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.secondaryTextColor,
+                ),
+              ),
+            ],
+          ),
+          Gap(16),
+          Text(
+            'Deskripsi',
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Gap(8),
+          Text(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+            style: TextStyle(
+              color: AppColors.labelTextColor,
+            ),
+          ),
+          Gap(8),
+          Text(
+            'Varian',
+            style: TextStyle(
+              color: AppColors.primaryTextColor,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          Gap(4),
+          ...List.generate(
+            3,
+            (index) => Text(
+              'Varian ${index + 1}',
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: AppColors.labelTextColor,
+              ),
+            ),
+          ),
+          Gap(40),
+          ElevatedButton(
+            onPressed: () async {
+              const url = 'https://blog.logrocket.com';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(Get.width, 42.h),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8.r),
+                ),
+              ),
+              foregroundColor: Colors.white,
+              backgroundColor: AppColors.shopeeColor,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image(
+                  width: 20,
+                  image: AssetImage('assets/images/shopee_logo.png'),
+                ),
+                Gap(16),
+                Text(
+                  'Shopee',
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                foregroundColor: Colors.white,
-                backgroundColor: AppColors.shopeeColor,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image(
-                    width: 20,
-                    image: AssetImage('assets/images/shopee_logo.png'),
-                  ),
-                  Gap(16),
-                  Text(
-                    'Shopee',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      )
-    ],
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
   );
 }
