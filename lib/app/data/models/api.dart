@@ -12,4 +12,6 @@ class AppApi {
   static const logoutUrl = '/logout';
   static const dashboard = '/dashboard';
   static const listproduct = '/product';
+  static const transaksi = '/transaksi';
+  static const chartTransaksi = '/chart/transaksi';
 }
