@@ -28,29 +28,15 @@ class Data {
   int? id;
   String? tanggal;
   int? jumlah;
-  int? totalHarga;
-  String? keterangan;
-  int? isPreorder;
   int? isComplete;
   Products? products;
 
-  Data(
-      {this.id,
-      this.tanggal,
-      this.jumlah,
-      this.totalHarga,
-      this.keterangan,
-      this.isPreorder,
-      this.isComplete,
-      this.products});
+  Data({this.id, this.tanggal, this.jumlah, this.isComplete, this.products});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     tanggal = json['tanggal'];
     jumlah = json['jumlah'];
-    totalHarga = json['total_harga'];
-    keterangan = json['keterangan'];
-    isPreorder = json['is_Preorder'];
     isComplete = json['is_complete'];
     products = json['products'] != null
         ? new Products.fromJson(json['products'])
@@ -62,9 +48,6 @@ class Data {
     data['id'] = this.id;
     data['tanggal'] = this.tanggal;
     data['jumlah'] = this.jumlah;
-    data['total_harga'] = this.totalHarga;
-    data['keterangan'] = this.keterangan;
-    data['is_Preorder'] = this.isPreorder;
     data['is_complete'] = this.isComplete;
     if (this.products != null) {
       data['products'] = this.products!.toJson();

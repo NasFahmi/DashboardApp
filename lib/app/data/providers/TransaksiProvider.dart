@@ -6,7 +6,7 @@ class TransaksiProvider extends GetConnect {
         '${AppApi.BASEURL + AppApi.transaksi}',
         headers: {'Accept': 'application/json'},
       );
-  Future<Response> getDataChart(int id) => get(
+  Future<Response> getDataChart() => get(
         '${AppApi.BASEURL + AppApi.chartTransaksi}',
         headers: {'Accept': 'application/json'},
       );
