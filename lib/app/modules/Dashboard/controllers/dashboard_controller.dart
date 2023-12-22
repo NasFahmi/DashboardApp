@@ -62,7 +62,7 @@ class DashboardController extends GetxController {
         update();
         print(
             'sample foto ${dashboardData.value.data?.product?[0].fotos?[0].url}');
-        print(dashboardData.value.data?.product?[1].fotos?.first.url);
+        print(dashboardData.value.data?.product?[0].fotos?.first.url);
         print(dashboardData.value.data?.product?.length);
       } else {
         print('errors ${response.statusCode}');

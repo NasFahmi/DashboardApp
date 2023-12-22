@@ -30,7 +30,7 @@ class ProdukView extends GetView<ProdukController> {
           children: [
             HeaderProduct(),
             Expanded(
-              child: Padding(
+              child: Container(
                 padding: EdgeInsets.all(8.0),
                 child: RefreshIndicator(
                   onRefresh: () async {

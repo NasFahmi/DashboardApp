@@ -274,6 +274,8 @@ class CreateProductView extends GetView<CreateProductController> {
                       onTap: () {
                         if (controller.formKey.value.currentState?.validate() ??
                             false) {
+                          // controller.addPathImage();
+                          controller.uploadProduct();
                           // All form fields are valid, proceed with submission
                           // You may want to call a function here to handle submission
                         }

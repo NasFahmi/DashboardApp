@@ -9,14 +9,6 @@ class TransaksiController extends GetxController {
   Rx<ChartTransaksi> chartTransaksiInformation = ChartTransaksi().obs;
   List sumValues = [].obs;
   List allDataDates = [].obs;
-  List<int> dataSixBar = [
-    500000,
-    800000,
-    300000,
-    400000,
-    350000,
-    750000,
-  ].obs;
 
   @override
   void onInit() {
