@@ -6,14 +6,15 @@ import 'package:pawonkoe/app/data/models/api.dart';
 
 class ProductProvider extends GetConnect {
   Future<Response> getListProduct() => get(
-        '${AppApi.BASEURL + AppApi.listproduct}',
+        '${AppApi.BASEURL + AppApi.product}',
         headers: {'Accept': 'application/json'},
       );
   Future<Response> getProductById(int id) => get(
-        '${AppApi.BASEURL + AppApi.listproduct}/${id}',
+        '${AppApi.BASEURL + AppApi.product}/${id}',
         headers: {'Accept': 'application/json'},
       );
-  Future<Response> postProduct(List<String> listImage, Map data) {
+  Future<Response> postProduct(
+      List<String> listImage, List<String> varian, Map data) {
     try {
       final form = FormData({});
       data.forEach((key, value) {
@@ -25,9 +26,15 @@ class ProductProvider extends GetConnect {
           MultipartFile(File(path), filename: path.split('/').last),
         ));
       }
+      for (var v in varian) {
+        form.fields.add(MapEntry(
+          'varian[]',
+          v, // Add the variant value to the form field
+        ));
+      }
 
       return post(
-        'http://192.168.1.30:8000/api/product',
+        'http://192.168.1.16:8000/api/product',
         form,
         headers: {
           'Accept': 'application/json',
