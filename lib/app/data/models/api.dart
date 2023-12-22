@@ -7,8 +7,8 @@ class AppApi {
   // static const BASEURL = 'http://10.252.37.179:8000/api';
   // static const BASEURL = 'http://192.168.1.13:8000/api';
   // static const PATHIMAGE = 'http://192.168.1.13:8000/storage';
-  static const BASEURL = 'http://192.168.1.24:8000/api';
-  static const PATHIMAGE = 'http://192.168.1.24:8000/storage';
+  static const BASEURL = 'http://192.168.1.16:8000/api';
+  static const PATHIMAGE = 'http://192.168.1.16:8000/storage';
 
   static const loginUrl = '/login';
   static const logoutUrl = '/logout';

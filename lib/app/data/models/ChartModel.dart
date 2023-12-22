@@ -1,10 +1,10 @@
-class ChartTransaksi {
+class ChartDataTransaksi {
   bool? success;
   Data? data;
 
-  ChartTransaksi({this.success, this.data});
+  ChartDataTransaksi({this.success, this.data});
 
-  ChartTransaksi.fromJson(Map<String, dynamic> json) {
+  ChartDataTransaksi.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
@@ -20,53 +20,34 @@ class ChartTransaksi {
 }
 
 class Data {
-  List<DataPenjualan>? dataPenjualan;
+  List<String>? dataPenjualan;
+  List<String>? bulan;
   String? startDate;
   String? endDay;
+  int? tahun;
 
-  Data({this.dataPenjualan, this.startDate, this.endDay});
+  Data(
+      {this.dataPenjualan,
+      this.bulan,
+      this.startDate,
+      this.endDay,
+      this.tahun});
 
   Data.fromJson(Map<String, dynamic> json) {
-    if (json['data_penjualan'] != null) {
-      dataPenjualan = <DataPenjualan>[];
-      json['data_penjualan'].forEach((v) {
-        dataPenjualan!.add(new DataPenjualan.fromJson(v));
-      });
-    }
+    dataPenjualan = json['data_penjualan'].cast<String>();
+    bulan = json['bulan'].cast<String>();
     startDate = json['start_date'];
     endDay = json['endDay'];
+    tahun = json['tahun'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.dataPenjualan != null) {
-      data['data_penjualan'] =
-          this.dataPenjualan!.map((v) => v.toJson()).toList();
-    }
+    data['data_penjualan'] = this.dataPenjualan;
+    data['bulan'] = this.bulan;
     data['start_date'] = this.startDate;
     data['endDay'] = this.endDay;
-    return data;
-  }
-}
-
-class DataPenjualan {
-  List<String>? dates;
-  List<String>? values;
-  int? sum;
-
-  DataPenjualan({this.dates, this.values, this.sum});
-
-  DataPenjualan.fromJson(Map<String, dynamic> json) {
-    dates = json['dates'].cast<String>();
-    values = json['values'].cast<String>();
-    sum = json['sum'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['dates'] = this.dates;
-    data['values'] = this.values;
-    data['sum'] = this.sum;
+    data['tahun'] = this.tahun;
     return data;
   }
 }

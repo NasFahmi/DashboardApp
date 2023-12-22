@@ -89,7 +89,7 @@ class BarDataPendapatan extends StatelessWidget {
                   NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ')
                       .format(rod.toY);
               return BarTooltipItem(
-                '1-6 September 2023 $value',
+                '${controller.Bulan[rodIndex]} $value',
                 TextStyle(
                   fontSize: 10.sp,
                   color: Colors.white,
@@ -104,9 +104,6 @@ class BarDataPendapatan extends StatelessWidget {
             double toYValue = 0.0; // Default to 0
 
             // Check if there's data available for the current index
-            if (index < controller.sumValues.length) {
-              toYValue = controller.sumValues[index].toDouble();
-            }
 
             return BarChartGroupData(
               x: index + 1,

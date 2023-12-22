@@ -34,27 +34,20 @@ class TransaksiView extends GetView<TransaksiController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Pendapatan 30 Hari Terakhir',
-                    style: TextStyle(
-                      color: AppColors.primaryTextColor,
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  Text(
-                    '*Setiap Bar mewakili 5 hari',
-                    style: TextStyle(
-                      fontSize: 10.sp,
-                      color: AppColors.labelTextColor,
+                  Obx(
+                    () => Text(
+                      'Pendapatan di tahun ${controller.chartTransaksiInformation.value.data?.tahun}',
+                      style: TextStyle(
+                        color: AppColors.primaryTextColor,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                   Gap(20),
                   SizedBox(
                     height: 160.h,
-                    child: Obx(
-                      () => lineChartPendapatan(),
-                    ),
+                    child: barChartPendapatan(),
                   ),
                 ],
               ),
@@ -68,8 +61,8 @@ class TransaksiView extends GetView<TransaksiController> {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () async {
+                  controller.getDataChartTransaksi();
                   controller.getDataTransaksi();
-                  controller.getSumValue();
                   // print(controller.sumValues);
                 },
                 child: Obx(
@@ -230,9 +223,10 @@ class TransaksiView extends GetView<TransaksiController> {
   }
 
   BarChart barChartPendapatan() {
+    List bulan = controller.Bulan.value;
     return BarChart(
       BarChartData(
-        maxY: 2000000,
+        maxY: 5000000,
         minY: 0,
         gridData: FlGridData(
           show: false,
@@ -247,32 +241,62 @@ class TransaksiView extends GetView<TransaksiController> {
                   case 1:
                     return Container(
                       margin: EdgeInsets.only(top: 8.h),
-                      child: Text('1-5'),
+                      child: Text('Jan'),
                     );
                   case 2:
                     return Container(
                       margin: EdgeInsets.only(top: 8.h),
-                      child: Text('6-10'),
+                      child: Text('Feb'),
                     );
                   case 3:
                     return Container(
                       margin: EdgeInsets.only(top: 8.h),
-                      child: Text('11-15'),
+                      child: Text('Mar'),
                     );
                   case 4:
                     return Container(
                       margin: EdgeInsets.only(top: 8.h),
-                      child: Text('16-20'),
+                      child: Text('Apr'),
                     );
                   case 5:
                     return Container(
                       margin: EdgeInsets.only(top: 8.h),
-                      child: Text('21-25'),
+                      child: Text('Mei'),
                     );
                   case 6:
                     return Container(
                       margin: EdgeInsets.only(top: 8.h),
-                      child: Text('26-30'),
+                      child: Text('Jun'),
+                    );
+                  case 7:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('Jul'),
+                    );
+                  case 8:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('Ags'),
+                    );
+                  case 9:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('Sep'),
+                    );
+                  case 10:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('Okt'),
+                    );
+                  case 11:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('Nov'),
+                    );
+                  case 12:
+                    return Container(
+                      margin: EdgeInsets.only(top: 8.h),
+                      child: Text('Des'),
                     );
                   default:
                     return Text('');
@@ -303,7 +327,7 @@ class TransaksiView extends GetView<TransaksiController> {
                   NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ')
                       .format(rod.toY);
               return BarTooltipItem(
-                '1-6 September 2023 $value',
+                '${controller.chartTransaksiInformation.value.data?.bulan?[groupIndex]} $value',
                 TextStyle(
                   fontSize: 10.sp,
                   color: Colors.white,
@@ -314,13 +338,15 @@ class TransaksiView extends GetView<TransaksiController> {
           ),
         ),
         barGroups: [
-          ...List.generate(15, (index) {
-            double toYValue = 0.0; // Default to 0
-
+          ...List.generate(12, (index) {
+            double toYValue = double.tryParse(controller
+                        .chartTransaksiInformation
+                        .value
+                        .data
+                        ?.dataPenjualan?[index] ??
+                    '0') ??
+                0.0;
             // Check if there's data available for the current index
-            if (index < controller.sumValues.length) {
-              toYValue = controller.sumValues[index].toDouble();
-            }
 
             return BarChartGroupData(
               x: index + 1,
@@ -336,7 +362,7 @@ class TransaksiView extends GetView<TransaksiController> {
                     fromY: 0,
                     show: true,
                     color: AppColors.BackDataChart,
-                    toY: 2000000,
+                    toY: 5000000,
                   ),
                 ),
               ],
