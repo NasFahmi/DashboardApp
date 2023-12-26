@@ -2,8 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
 import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
 import 'package:pawonkoe/app/modules/createProduct/controllers/image_helper.dart';
+import 'package:pawonkoe/app/routes/app_pages.dart';
 
 class CreateProductController extends GetxController {
   ProductProvider productProvider = ProductProvider();
@@ -69,7 +71,12 @@ class CreateProductController extends GetxController {
           await productProvider.postProduct(imagePath, varianValues, data);
       if (response.statusCode == 200 || response.statusCode == 201) {
         print(response.body);
+        clearControllersAndImages(); // Membersihkan controller dan daftar gambar
+        Get.offAndToNamed(Routes.HOME);
+        Get.showSnackbar(snackBarSuccesfullyCreateProduct());
       } else {
+        Get.back();
+        Get.showSnackbar(snackBarTimeOut());
         print(response.statusCode);
         print(response.body);
       }
@@ -77,5 +84,22 @@ class CreateProductController extends GetxController {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  void clearControllersAndImages() {
+    // Membersihkan semua controller
+    namaProduct.clear();
+    harga.clear();
+    deskripsi.clear();
+    linkShopee.clear();
+    stok.clear();
+    beratJenis.clear();
+    for (var controller in varianControllers) {
+      controller.clear();
+    }
+
+    // Membersihkan daftar gambar
+    images.clear();
+    imagePath.clear();
   }
 }
