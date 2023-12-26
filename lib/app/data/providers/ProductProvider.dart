@@ -45,4 +45,9 @@ class ProductProvider extends GetConnect {
       return Future.error(e.toString());
     }
   }
+
+  Future<Response> deleteProduct(int id) => delete(
+        '${AppApi.BASEURL + AppApi.product}/${id}',
+        headers: {'Accept': 'application/json'},
+      );
 }

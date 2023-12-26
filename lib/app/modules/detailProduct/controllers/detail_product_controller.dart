@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:pawonkoe/app/data/models/DetailProductModel.dart';
 import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
+import 'package:pawonkoe/app/modules/home/views/home_view.dart';
+import 'package:pawonkoe/app/routes/app_pages.dart';
 
 class DetailProductController extends GetxController {
   //TODO: Implement DetailProductController
@@ -39,6 +41,19 @@ class DetailProductController extends GetxController {
         print(productDetailInformation.value.data?.fotos?.first.url);
         print(productDetailInformation.value.data?.varians?.length);
         print(productDetailInformation.value.data?.varians?[0].jenisVarian);
+      }
+    } catch (e) {}
+  }
+
+  Future<void> deleteProductByid() async {
+    try {
+      final response = await productProvider.deleteProduct(productArgument);
+      if (response.statusCode == 200) {
+        print('status fecth 200 ok');
+        print(response.body);
+        Get.offAll(HomeView(
+          pathHome: 2,
+        ));
       }
     } catch (e) {}
   }

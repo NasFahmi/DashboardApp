@@ -9,13 +9,20 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import '../../../../app/theme/colors.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  int? pathHome;
+  HomeView({
+    Key? key,
+    int? pathHome,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(
-        () => controller.Pages[controller.selectedIndex.value],
-      ),
+      body: Obx(() {
+        if (pathHome != null) {
+          return controller.Pages[pathHome!];
+        }
+        return controller.Pages[controller.selectedIndex.value];
+      }),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,
