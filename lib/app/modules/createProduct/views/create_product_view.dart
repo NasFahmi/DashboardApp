@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pawonkoe/app/components/TextFormFieldComponent.dart';
+import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
+import 'package:pawonkoe/app/routes/app_pages.dart';
 import 'package:pawonkoe/app/theme/colors.dart';
 
 import '../controllers/create_product_controller.dart';
@@ -275,7 +277,8 @@ class CreateProductView extends GetView<CreateProductController> {
                         if (controller.formKey.value.currentState?.validate() ??
                             false) {
                           // controller.addPathImage();
-                          controller.uploadProduct();
+                          confirmDialog();
+                          // controller.uploadProduct();
                           // All form fields are valid, proceed with submission
                           // You may want to call a function here to handle submission
                         }
@@ -308,6 +311,84 @@ class CreateProductView extends GetView<CreateProductController> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> confirmDialog() {
+    return Get.defaultDialog(
+      contentPadding: EdgeInsets.only(bottom: 16.h, top: 12.h),
+      titlePadding: EdgeInsets.only(top: 12.h),
+      backgroundColor: AppColors.backgroundColorSecoundary,
+      title: "Buat Product",
+      titleStyle: TextStyle(
+        color: AppColors.primaryTextColor,
+        fontWeight: FontWeight.w800,
+        fontSize: 18.sp,
+      ),
+      // textConfirm: 'Apakah Informasi Product Sudah Benar?',
+      radius: 16.r,
+      content: Container(
+        // height: 1,
+        width: Get.width / 1,
+        child: Center(
+          child: Column(
+            children: [
+              Text(
+                'Apakah Informasi Product Sudah Benar?',
+                style: TextStyle(
+                  color: AppColors.labelTextColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Gap(4),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            minimumSize: Size(Get.width / 2.75, 40.h),
+            backgroundColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: AppColors.secondaryTextColor,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.r),
+              ),
+            ),
+          ),
+          onPressed: () {
+            Get.back(); // Close the dialog
+          },
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            elevation: 0,
+            minimumSize: Size(Get.width / 2.75, 40.h),
+            backgroundColor: Colors.blue.shade600,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: AppColors.secondaryTextColor,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.r),
+              ),
+            ),
+          ),
+          onPressed: () {
+            controller.uploadProduct();
+          },
+          child: Text('Submit'),
+        ),
+      ],
     );
   }
 
