@@ -148,3 +148,48 @@ GetSnackBar snackBarSuccesfullyCreateProduct() {
     ),
   );
 }
+
+GetSnackBar snackBarSuccesfullyDeleteProduct() {
+  return GetSnackBar(
+    animationDuration: Duration(milliseconds: 900),
+    duration: Duration(seconds: 3),
+    snackPosition: SnackPosition.TOP,
+    backgroundColor: Colors.transparent,
+    maxWidth: Get.width / 1.50,
+    messageText: Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 12.h,
+        horizontal: 20.w,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.redColorThirdy,
+        borderRadius: BorderRadius.all(
+          Radius.circular(16.r),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Succesfully!!',
+            style: TextStyle(
+              fontSize: 16.sp,
+              color: AppColors.backgroundColor,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Gap(2.h),
+          Text(
+            textAlign: TextAlign.center,
+            'Berhasil Menhapus Product',
+            style: TextStyle(
+              color: AppColors.backgroundColorSecoundary,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}

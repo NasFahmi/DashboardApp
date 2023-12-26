@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
 import 'package:pawonkoe/app/data/models/DetailProductModel.dart';
 import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
 import 'package:pawonkoe/app/modules/home/views/home_view.dart';
@@ -51,10 +52,11 @@ class DetailProductController extends GetxController {
       if (response.statusCode == 200) {
         print('status fecth 200 ok');
         print(response.body);
-        Get.offAll(HomeView(
-          pathHome: 2,
-        ));
+        Get.offAndToNamed(Routes.HOME);
+        Get.showSnackbar(snackBarSuccesfullyDeleteProduct());
       }
-    } catch (e) {}
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
 }
