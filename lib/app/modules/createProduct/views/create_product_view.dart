@@ -103,14 +103,14 @@ class CreateProductView extends GetView<CreateProductController> {
                       regex: RegExp(r'^[a-zA-Z0-9]+$'),
                     ),
                     Text(
-                      'Berat',
+                      'Spesifikasi',
                       textAlign: TextAlign.start,
                       style: TextStyle(),
                     ),
                     Gap(4),
                     TextFormFieldComponent(
-                      controllerForm: controller.beratJenis,
-                      validationForm: 'Berat jenis Tidak Boleh Kosong',
+                      controllerForm: controller.spesifikasi,
+                      validationForm: 'Spesifikasi Product Tidak Boleh Kosong',
                       hintTextField: 'Berat jenis Product',
                       regex: RegExp(r'^[a-zA-Z0-9]+$'),
                     ),

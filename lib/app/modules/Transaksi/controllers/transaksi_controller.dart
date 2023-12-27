@@ -38,6 +38,7 @@ class TransaksiController extends GetxController {
 
         // print(response.body);
         // print(transaksiInformation.value.data?[0].products?.namaProduct);
+        print(transaksiInformation.value.data?[0].products?.fotos?[0].url);
       } else {
         print(response.statusCode);
       }

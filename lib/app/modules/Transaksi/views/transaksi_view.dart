@@ -103,8 +103,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                       borderRadius: BorderRadius.circular(8.r),
                                       child: Image(
                                         fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/test.jpg'),
+                                        image: NetworkImage(
+                                            '${controller.transaksiInformation.value.data?[index].products?.fotos?[0].url}'),
                                       ),
                                     ),
                                   ),

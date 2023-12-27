@@ -59,7 +59,10 @@ class DetailProductView extends GetView<DetailProductController> {
                   ),
                   child: IconButton(
                     onPressed: () {
-                      confirmDialog();
+                      print('edit dialog');
+                      Get.toNamed(Routes.EDIT_PRODUCT,
+                          arguments: controller.productDetailInformation);
+                      print(controller.productDetailInformation);
                     },
                     icon: const Icon(
                       FluentIcons.edit_24_regular,
@@ -74,7 +77,10 @@ class DetailProductView extends GetView<DetailProductController> {
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      print('delete popup');
+                      confirmDialog();
+                    },
                     icon: const Icon(
                       FluentIcons.delete_24_regular,
                       color: AppColors.redColorPrimary,
@@ -98,7 +104,7 @@ class DetailProductView extends GetView<DetailProductController> {
       ),
       child: IconButton(
         onPressed: () {
-          Get.offAndToNamed(Routes.HOME);
+          Get.back();
         },
         icon: const Icon(FluentIcons.arrow_left_24_regular),
       ),
@@ -326,7 +332,7 @@ Future<dynamic> confirmDialog() {
         child: Column(
           children: [
             Text(
-              'Apakah Yakin Ingin Menghapus Product?',
+              'Apakah Yakin Ingin Menghapus Product Ini?',
               style: TextStyle(
                 color: AppColors.labelTextColor,
                 fontSize: 14.sp,

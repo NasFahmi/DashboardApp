@@ -37,8 +37,7 @@ class ProdukView extends GetView<ProdukController> {
                     print('refresh');
                     controller.getdataListProduct();
                   },
-                  child: controller.productInformation.value.data != null &&
-                          controller.productInformation.value.data!.isNotEmpty
+                  child: controller.productInformation.value.data!.isNotEmpty
                       ? GridView.count(
                           childAspectRatio: 10 / 12,
                           crossAxisCount: 2,

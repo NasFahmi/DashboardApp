@@ -11,7 +11,7 @@ class CreateProductController extends GetxController {
   ProductProvider productProvider = ProductProvider();
   final TextEditingController namaProduct = TextEditingController();
   final TextEditingController harga = TextEditingController();
-  final TextEditingController beratJenis = TextEditingController();
+  final TextEditingController spesifikasi = TextEditingController();
   final TextEditingController deskripsi = TextEditingController();
   final TextEditingController linkShopee = TextEditingController();
   final TextEditingController stok = TextEditingController();
@@ -58,7 +58,7 @@ class CreateProductController extends GetxController {
       'deskripsi': deskripsi.text,
       'link_shopee': linkShopee.text,
       'stok': stok.text,
-      'spesifikasi_product': beratJenis.text,
+      'spesifikasi_product': spesifikasi.text,
     };
     List<String> varianValues =
         varianControllers.map((controller) => controller.text).toList();
@@ -72,7 +72,7 @@ class CreateProductController extends GetxController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print(response.body);
         clearControllersAndImages(); // Membersihkan controller dan daftar gambar
-        Get.offAndToNamed(Routes.HOME);
+        Get.offAllNamed(Routes.HOME);
         Get.showSnackbar(snackBarSuccesfullyCreateProduct());
       } else {
         Get.back();
@@ -93,7 +93,7 @@ class CreateProductController extends GetxController {
     deskripsi.clear();
     linkShopee.clear();
     stok.clear();
-    beratJenis.clear();
+    spesifikasi.clear();
     for (var controller in varianControllers) {
       controller.clear();
     }
