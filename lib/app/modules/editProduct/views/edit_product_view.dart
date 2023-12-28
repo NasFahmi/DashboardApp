@@ -110,7 +110,7 @@ class EditProductView extends GetView<EditProductController> {
                       controllerForm: controller.spesifikasi,
                       validationForm: 'Spesifikasi Tidak Boleh Kosong',
                       hintTextField: 'Spesifikasi Product',
-                      regex: RegExp(r'^[a-zA-Z0-9]+$'),
+                      regex: RegExp(r'^[a-zA-Z0-9] +$'),
                     ),
                     Gap(4),
                     Text('Varian'),
@@ -274,8 +274,9 @@ class EditProductView extends GetView<EditProductController> {
                       onTap: () {
                         if (controller.formKey.value.currentState?.validate() ??
                             false) {
+                          controller.editProduct();
                           // controller.addPathImage();
-                          confirmDialog();
+                          // confirmDialog();
                           // controller.uploadProduct();
                           // All form fields are valid, proceed with submission
                           // You may want to call a function here to handle submission
@@ -381,7 +382,9 @@ class EditProductView extends GetView<EditProductController> {
               ),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            controller.editProduct();
+          },
           child: Text('Submit'),
         ),
       ],

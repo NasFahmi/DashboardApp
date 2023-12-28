@@ -46,6 +46,39 @@ class ProductProvider extends GetConnect {
     }
   }
 
+  Future<Response> editProduct(
+      int productId, List<String> listImage, List<String> varian, Map data) {
+    try {
+      final form = FormData({});
+      data.forEach((key, value) {
+        form.fields.add(MapEntry(key, value.toString()));
+      });
+      for (var path in listImage) {
+        form.files.add(MapEntry(
+          'image[]',
+          MultipartFile(File(path), filename: path.split('/').last),
+        ));
+      }
+      for (var v in varian) {
+        form.fields.add(MapEntry(
+          'varian[]',
+          v, // Add the variant value to the form field
+        ));
+      }
+
+      return post(
+        '${AppApi.BASEURL + AppApi.product}/${productId}',
+        form,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data; boundary=${form.boundary}',
+        },
+      );
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
   Future<Response> deleteProduct(int id) => delete(
         '${AppApi.BASEURL + AppApi.product}/${id}',
         headers: {'Accept': 'application/json'},

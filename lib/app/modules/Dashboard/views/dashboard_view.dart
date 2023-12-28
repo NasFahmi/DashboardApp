@@ -174,22 +174,6 @@ class DashboardView extends GetView<DashboardController> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          'See All',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(
-                          FluentIcons.chevron_right_24_regular,
-                          size: 18.sp,
-                        )
-                      ],
-                    )
                   ],
                 ),
               ),
@@ -288,22 +272,6 @@ class DashboardView extends GetView<DashboardController> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          'View Detail',
-                          style: TextStyle(
-                            color: AppColors.secondaryTextColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(
-                          FluentIcons.chevron_right_24_regular,
-                          size: 18.sp,
-                        )
-                      ],
-                    )
                   ],
                 ),
               ),

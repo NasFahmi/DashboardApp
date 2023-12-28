@@ -11,13 +11,13 @@ class ProdukController extends GetxController {
   void onInit() {
     print('onInit product');
     super.onInit();
+    getdataListProduct();
   }
 
   @override
   void onReady() {
     print('onReady product');
     super.onReady();
-    getdataListProduct();
   }
 
   @override

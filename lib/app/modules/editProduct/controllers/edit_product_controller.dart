@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
+import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
 import 'package:pawonkoe/app/data/models/DetailProductModel.dart';
 import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
 import 'package:pawonkoe/app/modules/createProduct/controllers/image_helper.dart';
+import 'package:pawonkoe/app/routes/app_pages.dart';
 
 class EditProductController extends GetxController {
   //TODO: Implement EditProductController
@@ -23,7 +25,7 @@ class EditProductController extends GetxController {
   final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
 
   RxList varianProductInformation = [].obs;
-
+  int? productId;
   ImageHelper imageHelper = ImageHelper();
   RxList<File> images = <File>[].obs;
   var singleImage;
@@ -44,6 +46,7 @@ class EditProductController extends GetxController {
     deskripsi.text = productDetailInformation.value.data!.deskripsi!;
     linkShopee.text = productDetailInformation.value.data!.linkShopee!;
     stok.text = productDetailInformation.value.data!.stok!;
+    productId = productDetailInformation.value.data!.id;
     parsingProductDetailVariantoVariansProduct();
     // print(varianProductInformation);
     // print();
@@ -81,7 +84,41 @@ class EditProductController extends GetxController {
     for (File file in images) {
       imagePath.add(file.path);
     }
-    print(imagePath);
+    // print(imagePath);
+  }
+
+  Future<void> editProduct() async {
+    imagePath.clear();
+    addPathImage();
+    Map<String, dynamic> data = {
+      'nama_product': namaProduct.text,
+      'harga': harga.text,
+      'deskripsi': deskripsi.text,
+      'link_shopee': linkShopee.text,
+      'stok': stok.text,
+      'spesifikasi_product': spesifikasi.text,
+    };
+    List<String> varianValues =
+        varianControllers.map((controller) => controller.text).toList();
+
+    try {
+      print('fetch to api');
+      print(imagePath);
+      final response = await productProvider.editProduct(
+          productId!, imagePath, varianValues, data);
+      if (response.statusCode == 200) {
+        print(response.body);
+        images.clear();
+        imagePath.clear();
+        print('success update');
+        Get.offAllNamed(Routes.HOME);
+        Get.showSnackbar(snackBarSuccesfullyEditProduct());
+      } else {
+        Get.back();
+        Get.showSnackbar(snackBarTimeOut());
+        print(response.statusCode);
+      }
+    } catch (e) {}
   }
 
   void clearControllersAndImages() {
