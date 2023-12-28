@@ -49,18 +49,24 @@ class DashboardView extends GetView<DashboardController> {
               vertical: 24,
               horizontal: 16,
             ),
-            child: Container(
-              height: 40.h,
-              width: 40.w,
-              decoration: BoxDecoration(
-                color: AppColors.blueColorPrimary,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8.r),
+            child: GestureDetector(
+              onTap: () {
+                confirmDialog();
+                // print('press profile');
+              },
+              child: Container(
+                height: 40.h,
+                width: 40.w,
+                decoration: BoxDecoration(
+                  color: AppColors.redColorPrimary,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.r),
+                  ),
                 ),
-              ),
-              child: Icon(
-                FluentIcons.person_12_regular,
-                color: Colors.white,
+                child: Icon(
+                  FluentIcons.arrow_exit_20_regular,
+                  color: Colors.white,
+                ),
               ),
             ),
           )
@@ -352,6 +358,85 @@ class DashboardView extends GetView<DashboardController> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> confirmDialog() {
+    final DashboardController controller = Get.find();
+    return Get.defaultDialog(
+      contentPadding: EdgeInsets.only(bottom: 16.h, top: 12.h),
+      titlePadding: EdgeInsets.only(top: 12.h),
+      backgroundColor: AppColors.backgroundColorSecoundary,
+      title: "Exit App",
+      titleStyle: TextStyle(
+        color: AppColors.primaryTextColor,
+        fontWeight: FontWeight.w800,
+        fontSize: 18.sp,
+      ),
+      // textConfirm: 'Apakah Informasi Product Sudah Benar?',
+      radius: 16.r,
+      content: Container(
+        // height: 1,
+        width: Get.width / 1,
+        child: Center(
+          child: Column(
+            children: [
+              Text(
+                'Apakah Yakin Ingin Exit Applikasi?',
+                style: TextStyle(
+                  color: AppColors.labelTextColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Gap(4),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            minimumSize: Size(Get.width / 2.75, 40.h),
+            backgroundColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: AppColors.secondaryTextColor,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.r),
+              ),
+            ),
+          ),
+          onPressed: () {
+            Get.back(); // Close the dialog
+          },
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            elevation: 0,
+            minimumSize: Size(Get.width / 2.75, 40.h),
+            backgroundColor: Colors.red.shade600,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: AppColors.secondaryTextColor,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.r),
+              ),
+            ),
+          ),
+          onPressed: () {
+            controller.exit();
+          },
+          child: Text('Exit'),
+        ),
+      ],
     );
   }
 }

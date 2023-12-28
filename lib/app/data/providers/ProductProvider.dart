@@ -3,15 +3,22 @@ import 'dart:math';
 
 import 'package:get/get_connect/connect.dart';
 import 'package:pawonkoe/app/data/models/api.dart';
+import 'package:pawonkoe/app/data/providers/TokenHelper.dart';
 
 class ProductProvider extends GetConnect {
   Future<Response> getListProduct() => get(
         '${AppApi.BASEURL + AppApi.product}',
-        headers: {'Accept': 'application/json'},
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${TokenHelper.token}',
+        },
       );
   Future<Response> getProductById(int id) => get(
         '${AppApi.BASEURL + AppApi.product}/${id}',
-        headers: {'Accept': 'application/json'},
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${TokenHelper.token}',
+        },
       );
   Future<Response> postProduct(
       List<String> listImage, List<String> varian, Map data) {
@@ -38,6 +45,7 @@ class ProductProvider extends GetConnect {
         form,
         headers: {
           'Accept': 'application/json',
+          'Authorization': 'Bearer ${TokenHelper.token}',
           'Content-Type': 'multipart/form-data; boundary=${form.boundary}',
         },
       );
@@ -71,6 +79,7 @@ class ProductProvider extends GetConnect {
         form,
         headers: {
           'Accept': 'application/json',
+          'Authorization': 'Bearer ${TokenHelper.token}',
           'Content-Type': 'multipart/form-data; boundary=${form.boundary}',
         },
       );
@@ -81,6 +90,9 @@ class ProductProvider extends GetConnect {
 
   Future<Response> deleteProduct(int id) => delete(
         '${AppApi.BASEURL + AppApi.product}/${id}',
-        headers: {'Accept': 'application/json'},
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${TokenHelper.token}',
+        },
       );
 }

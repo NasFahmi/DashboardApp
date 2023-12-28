@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pawonkoe/app/data/models/DashboardModel.dart';
 import 'package:pawonkoe/app/data/providers/DashboardProvider.dart';
+import 'package:pawonkoe/app/data/providers/TokenHelper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:intl/intl.dart';
 
@@ -12,11 +14,6 @@ class DashboardController extends GetxController {
 
   // DateTime dateTime = DateTime.now();
   Rx<DateTime> dateTime = DateTime.now().obs;
-
-  Future<String?> getToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
-  }
 
   @override
   void onInit() {
@@ -32,7 +29,8 @@ class DashboardController extends GetxController {
   @override
   void onReady() async {
     print('ready dashboard');
-    print(getToken());
+    print('Token is ${TokenHelper.token}');
+    // TokenHelper.getToken();
     getDataDashboard();
 
     // print(DateFormat('HH.mm dd MMMM yyyy').format(dateTime));
@@ -70,5 +68,10 @@ class DashboardController extends GetxController {
     } catch (e) {
       return Future.error(e);
     }
+  }
+
+  void exit() {
+    TokenHelper.clearToken();
+    SystemNavigator.pop();
   }
 }

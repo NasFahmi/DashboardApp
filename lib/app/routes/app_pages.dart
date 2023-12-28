@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pawonkoe/app/data/providers/TokenHelper.dart';
 
 import '../modules/Dashboard/bindings/dashboard_binding.dart';
 import '../modules/Dashboard/views/dashboard_view.dart';
@@ -24,7 +25,10 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static final INITIAL =
+      (TokenHelper.token == null || TokenHelper.token!.isEmpty)
+          ? Routes.LOGIN
+          : Routes.DASHBOARD;
 
   static final routes = [
     GetPage(

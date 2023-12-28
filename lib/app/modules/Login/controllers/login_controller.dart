@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
 import 'package:pawonkoe/app/data/providers/AuthProvider.dart';
 import 'package:pawonkoe/app/data/models/AuthModel.dart';
+import 'package:pawonkoe/app/data/providers/TokenHelper.dart';
 import 'package:pawonkoe/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,11 +32,6 @@ class LoginController extends GetxController {
     print(passwordController.text);
   }
 
-  addToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('token', loginInformation.data!.token!);
-  }
-
   Future<void> authLogin() async {
     print('login prosess');
     Map<String, dynamic> user = {
@@ -50,12 +46,15 @@ class LoginController extends GetxController {
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.body;
         loginInformation = AuthLogin.fromJson(responseData); //success
-        addToken();
+        TokenHelper.addToken(loginInformation.data!.token!);
+        // addToken();
+        debugPrint(TokenHelper.token);
+        // debugPrint(TokenHelper.);
         // print(responseData);
         debugPrint(loginInformation.data?.token); //! can access token
         loading.toggle();
         if (loginInformation.success == true) {
-          Get.offNamed(Routes.HOME);
+          Get.offAllNamed(Routes.HOME);
         }
       } else if (response.statusCode == 400) {
         loading.toggle();
