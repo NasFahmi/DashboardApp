@@ -32,6 +32,20 @@ class LoginController extends GetxController {
     print(passwordController.text);
   }
 
+  void onInit() {
+    TokenHelper.getToken().then((String? token) {
+      if (token != null) {
+        Get.offAndToNamed(Routes.HOME);
+        TokenHelper.addToken(token);
+      } else {
+        print("Token not found");
+      }
+    });
+    // print('token = ${TokenHelper.token}');
+
+    super.onInit();
+  }
+
   Future<void> authLogin() async {
     print('login prosess');
     Map<String, dynamic> user = {
@@ -48,7 +62,8 @@ class LoginController extends GetxController {
         loginInformation = AuthLogin.fromJson(responseData); //success
         TokenHelper.addToken(loginInformation.data!.token!);
         // addToken();
-        debugPrint(TokenHelper.token);
+        // debugPrint(TokenHelper.token);
+
         // debugPrint(TokenHelper.);
         // print(responseData);
         debugPrint(loginInformation.data?.token); //! can access token
