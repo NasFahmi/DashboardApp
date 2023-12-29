@@ -24,7 +24,9 @@ part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
-  static final INITIAL = Routes.LOGIN;
+
+  static final INITIAL = TokenHelper.getToken()
+      .then((String? token) => token != null ? Routes.HOME : Routes.LOGIN);
 
   static final routes = [
     GetPage(
