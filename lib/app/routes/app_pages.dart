@@ -24,9 +24,13 @@ part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
+  // static Future<String?> _initialRoute() async {
+  //   String? token = await TokenHelper.getToken();
+  //   return token != null ? Routes.HOME : Routes.LOGIN;
+  // }
 
-  static final INITIAL = TokenHelper.getToken()
-      .then((String? token) => token != null ? Routes.HOME : Routes.LOGIN);
+  // static var INITIAL = _initialRoute();
+  static final INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(

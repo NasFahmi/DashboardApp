@@ -34,7 +34,11 @@ class LoginController extends GetxController {
 
   void onInit() {
     // print('token = ${TokenHelper.token}');
-
+    TokenHelper.getToken().then((String? token) {
+      if (token != null) {
+        Get.offAndToNamed(Routes.HOME);
+      }
+    });
     super.onInit();
   }
 
