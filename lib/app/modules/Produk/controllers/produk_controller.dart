@@ -15,13 +15,12 @@ class ProdukController extends GetxController {
     print('onInit product');
     super.onInit();
     getdataListProduct();
-    mainProductList.addAll(productInformation.value.data!);
-    productDisplayList = RxList.from(mainProductList);
   }
 
   @override
   void onReady() {
     print('onReady product');
+
     super.onReady();
   }
 
@@ -43,7 +42,9 @@ class ProdukController extends GetxController {
         Map<String, dynamic> responseData = response.body;
         print(responseData);
         productInformation.value = ListProduct.fromJson(responseData);
-
+        mainProductList.clear();
+        mainProductList.addAll(productInformation.value.data!);
+        productDisplayList = RxList.from(mainProductList);
         print('in main product list = ${mainProductList.length}');
 
         print(productInformation.value.data?[0].namaProduct);
@@ -61,5 +62,6 @@ class ProdukController extends GetxController {
         .where((element) =>
             element.namaProduct!.toLowerCase().contains(value.toLowerCase()))
         .toList());
+    print('total product search = ${productDisplayList.length}');
   }
 }
