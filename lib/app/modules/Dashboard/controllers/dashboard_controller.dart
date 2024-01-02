@@ -19,6 +19,7 @@ class DashboardController extends GetxController {
   @override
   void onInit() {
     print('oninit dashboard');
+
     Timer.periodic(Duration(seconds: 1), (timer) {
       dateTime.value = DateTime.now();
       // print(dateTime);

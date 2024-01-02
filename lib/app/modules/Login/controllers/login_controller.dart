@@ -36,6 +36,8 @@ class LoginController extends GetxController {
     // print('token = ${TokenHelper.token}');
     TokenHelper.getToken().then((String? token) {
       if (token != null) {
+        print(token);
+        TokenHelper.addToken(token);
         Get.offAndToNamed(Routes.HOME);
       }
     });

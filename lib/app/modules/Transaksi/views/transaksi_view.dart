@@ -103,8 +103,21 @@ class TransaksiView extends GetView<TransaksiController> {
                                       borderRadius: BorderRadius.circular(8.r),
                                       child: Image(
                                         fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            '${controller.transaksiInformation.value.data?[index].products?.fotos?[0].url}'),
+                                        image: controller
+                                                    .transaksiInformation
+                                                    .value
+                                                    .data?[index]
+                                                    .products
+                                                    ?.fotos
+                                                    ?.first
+                                                    .url !=
+                                                null
+                                            ? NetworkImage(
+                                                '${controller.transaksiInformation.value.data?[index].products?.fotos?.first.url}')
+                                            : AssetImage(
+                                                    'assets/images/image_default.png')
+                                                as ImageProvider<Object>,
+                                        // Ensure that the image provider is explicitly cast to ImageProvider<Object>
                                       ),
                                     ),
                                   ),

@@ -13,14 +13,14 @@ class TransaksiController extends GetxController {
   void onInit() {
     print('onInit transaksi');
     super.onInit();
+    getDataTransaksi();
+    getDataChartTransaksi();
   }
 
   @override
   void onReady() {
     print('onReady transaksi');
     super.onReady();
-    getDataTransaksi();
-    getDataChartTransaksi();
   }
 
   @override

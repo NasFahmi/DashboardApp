@@ -1,3 +1,5 @@
+import 'package:pawonkoe/app/data/models/api.dart';
+
 class ListTransaksi {
   bool? success;
   List<Data>? data;
@@ -116,7 +118,7 @@ class Fotos {
 
   Fotos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    url = json['url'];
+    url = json['url'] != null ? '${AppApi.PATHIMAGE}/${json['url']}' : null;
   }
 
   Map<String, dynamic> toJson() {
