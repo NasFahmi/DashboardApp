@@ -30,27 +30,40 @@ class TransaksiView extends GetView<TransaksiController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              // padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Obx(
-                    () => Padding(
-                      padding: EdgeInsets.only(left: 16.w),
-                      child: Text(
-                        'Pendapatan di tahun ${controller.chartTransaksiInformation.value.data?.tahun}',
-                        style: TextStyle(
-                          color: AppColors.primaryTextColor,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w800,
-                        ),
+                    () => Text(
+                      'Pendapatan di tahun ${controller.chartTransaksiInformation.value.data?.tahun}',
+                      style: TextStyle(
+                        color: AppColors.primaryTextColor,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w800,
                       ),
                     ),
                   ),
                   Gap(20),
-                  SizedBox(
-                    height: 160.h,
-                    width: Get.width * 0.95,
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                    decoration: BoxDecoration(
+                      color: Color(0xfff3f4f6),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12.r),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFF000000).withOpacity(0.08),
+                          offset: Offset(-1, 3),
+                          blurRadius: 14,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    height: 180.h,
+                    width: Get.width,
                     child: lineChartPendapatan(),
                   ),
                 ],
@@ -240,10 +253,51 @@ class TransaksiView extends GetView<TransaksiController> {
   }
 
   LineChart lineChartPendapatan() {
+    // print(controller.Bulan);
     return LineChart(
       LineChartData(
+        lineTouchData: LineTouchData(
+          touchTooltipData: LineTouchTooltipData(
+            tooltipBgColor: Colors.grey.shade200,
+            getTooltipItems: (List<LineBarSpot> touchedSpots) {
+              return touchedSpots.map((LineBarSpot touchedSpot) {
+                final flSpot = touchedSpot;
+                // Customize the tooltip content based on your data
+                String tooltipText =
+                    '${controller.chartTransaksiInformation.value.data?.bulan?[flSpot.x.toInt() - 1]} ${flSpot.y.toStringAsFixed(2)}';
+                return LineTooltipItem(
+                  tooltipText,
+                  TextStyle(
+                      color: Colors.blue.shade700, fontWeight: FontWeight.bold),
+                );
+              }).toList();
+            },
+          ),
+          handleBuiltInTouches: true,
+          getTouchedSpotIndicator:
+              (LineChartBarData barData, List<int> spotIndexes) {
+            return spotIndexes.map((index) {
+              return TouchedSpotIndicatorData(
+                FlLine(color: Colors.blue, strokeWidth: 4),
+                FlDotData(
+                  show: true,
+                  getDotPainter: (spot, percent, barData, index) =>
+                      FlDotCirclePainter(
+                    radius: 6,
+                    color: Colors.blue,
+                  ),
+                ),
+              );
+            }).toList();
+          },
+        ),
         titlesData: FlTitlesData(
           rightTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: false,
+            ),
+          ),
+          bottomTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: false,
             ),
@@ -253,6 +307,18 @@ class TransaksiView extends GetView<TransaksiController> {
               showTitles: false,
             ),
           ),
+          leftTitles: AxisTitles(
+            // Customize the appearance of the left axis titles
+            sideTitles: SideTitles(
+              reservedSize: 32,
+              showTitles: true,
+              getTitlesWidget: (value, meta) {
+                return Text(
+                  meta.formattedValue.toString(),
+                );
+              },
+            ),
+          ),
         ),
         minX: 1,
         maxX: 12,
@@ -260,6 +326,27 @@ class TransaksiView extends GetView<TransaksiController> {
         maxY: 5000000,
         gridData: FlGridData(
           show: false,
+          drawHorizontalLine: true,
+          drawVerticalLine: true,
+          horizontalInterval:
+              5000000, // Customize horizontal grid line interval
+          verticalInterval: 6, // Customize vertical grid line interval
+          checkToShowHorizontalLine: (value) => true,
+          checkToShowVerticalLine: (value) => true,
+          getDrawingHorizontalLine: (value) {
+            return FlLine(
+              color: Colors.grey
+                  .withOpacity(0.5), // Customize horizontal grid line color
+              strokeWidth: 0.5, // Customize horizontal grid line width
+            );
+          },
+          getDrawingVerticalLine: (value) {
+            return FlLine(
+              color: Colors.grey
+                  .withOpacity(0.5), // Customize vertical grid line color
+              strokeWidth: 0.5, // Customize vertical grid line width
+            );
+          },
         ),
         borderData: FlBorderData(
           show: false,
@@ -298,227 +385,4 @@ class TransaksiView extends GetView<TransaksiController> {
       ),
     );
   }
-
-  BarChart barChartPendapatan() {
-    List bulan = controller.Bulan.value;
-    return BarChart(
-      BarChartData(
-        maxY: 5000000,
-        minY: 0,
-        gridData: FlGridData(
-          show: false,
-        ),
-        titlesData: FlTitlesData(
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 28,
-              getTitlesWidget: (value, meta) {
-                switch (value.toInt()) {
-                  case 1:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Jan'),
-                    );
-                  case 2:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Feb'),
-                    );
-                  case 3:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Mar'),
-                    );
-                  case 4:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Apr'),
-                    );
-                  case 5:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Mei'),
-                    );
-                  case 6:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Jun'),
-                    );
-                  case 7:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Jul'),
-                    );
-                  case 8:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Ags'),
-                    );
-                  case 9:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Sep'),
-                    );
-                  case 10:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Okt'),
-                    );
-                  case 11:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Nov'),
-                    );
-                  case 12:
-                    return Container(
-                      margin: EdgeInsets.only(top: 8.h),
-                      child: Text('Des'),
-                    );
-                  default:
-                    return Text('');
-                }
-              },
-            ),
-          ),
-          topTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: false,
-            ),
-          ),
-          rightTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: false,
-            ),
-          ),
-        ),
-        borderData: FlBorderData(show: false),
-        barTouchData: BarTouchData(
-          touchTooltipData: BarTouchTooltipData(
-            tooltipBgColor: Colors.blueAccent,
-            tooltipRoundedRadius: 8,
-            tooltipPadding: EdgeInsets.all(8),
-            tooltipMargin: 8,
-            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              String value =
-                  NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ')
-                      .format(rod.toY);
-              return BarTooltipItem(
-                '${controller.chartTransaksiInformation.value.data?.bulan?[groupIndex]} $value',
-                TextStyle(
-                  fontSize: 10.sp,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              );
-            },
-          ),
-        ),
-        barGroups: [
-          ...List.generate(12, (index) {
-            double toYValue = double.tryParse(controller
-                        .chartTransaksiInformation
-                        .value
-                        .data
-                        ?.dataPenjualan?[index] ??
-                    '0') ??
-                0.0;
-            // Check if there's data available for the current index
-
-            return BarChartGroupData(
-              x: index + 1,
-              barRods: [
-                BarChartRodData(
-                  toY: toYValue,
-                  color: AppColors.blueColorPrimary,
-                  width: 20.w,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(4.r),
-                  ),
-                  backDrawRodData: BackgroundBarChartRodData(
-                    fromY: 0,
-                    show: true,
-                    color: AppColors.BackDataChart,
-                    toY: 5000000,
-                  ),
-                ),
-              ],
-            );
-          }),
-        ],
-      ),
-    );
-  }
-}
-
-Widget bottomTitleWidgets(double value, TitleMeta meta) {
-  const style = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 12,
-  );
-  Widget text;
-  switch (value.toInt()) {
-    case 2:
-      text = const Text('MAR', style: style);
-      break;
-    case 5:
-      text = const Text('JUN', style: style);
-      break;
-    case 8:
-      text = const Text('SEP', style: style);
-      break;
-    case 11:
-      text = const Text('MAR', style: style);
-      break;
-    case 14:
-      text = const Text('JUN', style: style);
-      break;
-    case 17:
-      text = const Text('SEP', style: style);
-      break;
-    case 20:
-      text = const Text('MAR', style: style);
-      break;
-    case 23:
-      text = const Text('JUN', style: style);
-      break;
-    case 26:
-      text = const Text('SEP', style: style);
-      break;
-    case 30:
-      text = const Text('MAR', style: style);
-      break;
-
-    default:
-      text = const Text('', style: style);
-      break;
-  }
-
-  return SideTitleWidget(
-    axisSide: meta.axisSide,
-    child: text,
-  );
-}
-
-Widget leftTitleWidgets(double value, TitleMeta meta) {
-  const style = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 15,
-  );
-  String text;
-  switch (value.toInt()) {
-    case 1:
-      text = '10K';
-      break;
-    case 3:
-      text = '30k';
-      break;
-    case 5:
-      text = '50k';
-      break;
-    default:
-      return Container();
-  }
-
-  return Text(text, style: style, textAlign: TextAlign.left);
 }

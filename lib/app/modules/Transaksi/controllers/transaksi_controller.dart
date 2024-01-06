@@ -21,6 +21,7 @@ class TransaksiController extends GetxController {
   void onReady() {
     print('onReady transaksi');
     super.onReady();
+    print(Bulan);
   }
 
   @override
@@ -57,9 +58,9 @@ class TransaksiController extends GetxController {
         var dataPenjualan =
             chartTransaksiInformation.value?.data!.dataPenjualan;
         Bulan.value.addAll(responseData['data']['data_penjualan'].keys);
-        print(Bulan.value);
         print(response.body);
         print(chartTransaksiInformation.value.data?.dataPenjualan?[0]);
+        print(Bulan);
       } else {
         print(response.statusCode);
       }
