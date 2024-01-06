@@ -76,7 +76,7 @@ class CreateProductView extends GetView<CreateProductController> {
                       validationForm: 'Derksipsi Tidak Boleh Kosong',
                       controllerForm: controller.deskripsi,
                       hintTextField: 'Deskripsi',
-                      regex: RegExp(r'^[a-zA-Z0-9]+$'),
+                      regex: RegExp(r'^[a-zA-Z0-9 !@#$%^&*()-_+=]+$'),
                     ),
                     Text(
                       'Link Shopee',
@@ -88,7 +88,7 @@ class CreateProductView extends GetView<CreateProductController> {
                       validationForm: 'Link Shopee Tidak Boleh Kosong',
                       controllerForm: controller.linkShopee,
                       hintTextField: 'Link Shopee',
-                      regex: RegExp(r'^[a-zA-Z0-9!@#$%^&*()-_+=]+$'),
+                      regex: RegExp(r'^[a-zA-Z0-9 !@#$%^&*()-_+=]+$'),
                     ),
                     Text(
                       'Stok',
@@ -111,8 +111,8 @@ class CreateProductView extends GetView<CreateProductController> {
                     TextFormFieldComponent(
                       controllerForm: controller.spesifikasi,
                       validationForm: 'Spesifikasi Product Tidak Boleh Kosong',
-                      hintTextField: 'Berat jenis Product',
-                      regex: RegExp(r'^[a-zA-Z0-9]+$'),
+                      hintTextField: 'Spesifikasi Product',
+                      regex: RegExp(r'^[a-zA-Z0-9 !@#$%^&*()-_+=]+$'),
                     ),
                     Gap(4),
                     Text('Varian'),

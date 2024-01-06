@@ -88,8 +88,20 @@ class ProdukView extends GetView<ProdukController> {
                                                     BorderRadius.circular(8.r),
                                                 child: Image(
                                                   fit: BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      '${controller.productDisplayList[index].fotos?.first.url}'),
+                                                  image: controller
+                                                              .productDisplayList[
+                                                                  index]
+                                                              .fotos
+                                                              ?.first
+                                                              .url !=
+                                                          null
+                                                      ? NetworkImage(
+                                                          '${controller.productDisplayList[index].fotos?.first.url}')
+                                                      : AssetImage(
+                                                              'assets/images/image_default.png')
+                                                          as ImageProvider<
+                                                              Object>,
+                                                  // Ensure that the image provider is explicitly cast to ImageProvider<Object>
                                                 ),
                                               ),
                                             ),

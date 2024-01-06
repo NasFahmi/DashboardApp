@@ -30,24 +30,28 @@ class TransaksiView extends GetView<TransaksiController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              // padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Obx(
-                    () => Text(
-                      'Pendapatan di tahun ${controller.chartTransaksiInformation.value.data?.tahun}',
-                      style: TextStyle(
-                        color: AppColors.primaryTextColor,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w800,
+                    () => Padding(
+                      padding: EdgeInsets.only(left: 16.w),
+                      child: Text(
+                        'Pendapatan di tahun ${controller.chartTransaksiInformation.value.data?.tahun}',
+                        style: TextStyle(
+                          color: AppColors.primaryTextColor,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                     ),
                   ),
                   Gap(20),
                   SizedBox(
                     height: 160.h,
-                    child: barChartPendapatan(),
+                    width: Get.width * 0.95,
+                    child: lineChartPendapatan(),
                   ),
                 ],
               ),
@@ -231,6 +235,66 @@ class TransaksiView extends GetView<TransaksiController> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  LineChart lineChartPendapatan() {
+    return LineChart(
+      LineChartData(
+        titlesData: FlTitlesData(
+          rightTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: false,
+            ),
+          ),
+          topTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: false,
+            ),
+          ),
+        ),
+        minX: 1,
+        maxX: 12,
+        minY: 1,
+        maxY: 5000000,
+        gridData: FlGridData(
+          show: false,
+        ),
+        borderData: FlBorderData(
+          show: false,
+        ),
+        lineBarsData: [
+          LineChartBarData(
+            color: AppColors.blueColorPrimary,
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppColors.blueColorThird, // Dark blue color at the top
+                  AppColors.blueColorSecondary.withOpacity(
+                      0.1), // Slightly transparent version at the bottom
+                ],
+              ),
+            ),
+            barWidth: 3.0,
+            isCurved: true,
+            spots: [
+              ...List.generate(12, (index) {
+                double toYValue = double.tryParse(controller
+                            .chartTransaksiInformation
+                            .value
+                            .data
+                            ?.dataPenjualan?[index] ??
+                        '0') ??
+                    0.0;
+                return FlSpot(index + 1, toYValue);
+              })
+            ],
+          )
+        ],
       ),
     );
   }
@@ -457,58 +521,4 @@ Widget leftTitleWidgets(double value, TitleMeta meta) {
   }
 
   return Text(text, style: style, textAlign: TextAlign.left);
-}
-
-LineChart lineChartPendapatan() {
-  return LineChart(
-    LineChartData(
-      minX: 0,
-      maxX: 15,
-      minY: 0,
-      maxY: 8,
-      gridData: FlGridData(
-        show: false,
-      ),
-      borderData: FlBorderData(
-        show: true,
-      ),
-      lineBarsData: [
-        LineChartBarData(
-          isCurved: true,
-          spots: [
-            FlSpot(0, 3),
-            FlSpot(1, 2),
-            FlSpot(2, 5),
-            FlSpot(3, 3.1),
-            FlSpot(4, 4),
-            FlSpot(5.5, 3),
-            FlSpot(6, 4),
-            FlSpot(7, 3),
-            FlSpot(8, 2),
-            FlSpot(9, 5),
-            FlSpot(10, 3.1),
-            FlSpot(11, 4),
-            FlSpot(12, 3),
-            FlSpot(13, 4),
-            FlSpot(14, 4),
-            FlSpot(15, 3),
-            // FlSpot(16, 2),
-            // FlSpot(17, 5),
-            // FlSpot(18, 3.1),
-            // FlSpot(19, 4),
-            // FlSpot(20, 3),
-            // FlSpot(21, 4),
-            // FlSpot(22, 3),
-            // FlSpot(23, 2),
-            // FlSpot(24, 5),
-            // FlSpot(25, 3.1),
-            // FlSpot(26, 4),
-            // FlSpot(27, 3),
-            // FlSpot(28, 4),
-            // FlSpot(29, 4),
-          ],
-        )
-      ],
-    ),
-  );
 }

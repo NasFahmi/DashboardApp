@@ -64,6 +64,9 @@ class DashboardController extends GetxController {
             'sample foto ${dashboardData.value.data?.product?[0].fotos?[0].url}');
         print(dashboardData.value.data?.product?[0].fotos?.first.url);
         print(dashboardData.value.data?.product?.length);
+      } else if (response.unauthorized || response.statusCode == 401) {
+        TokenHelper.clearToken();
+        Get.offAndToNamed(Routes.LOGIN);
       } else {
         print('errors ${response.statusCode}');
       }
