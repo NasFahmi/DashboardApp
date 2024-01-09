@@ -67,19 +67,21 @@ class CreateProductController extends GetxController {
 
     try {
       print('fetch to api');
-      final response =
-          await productProvider.postProduct(imagePath, varianValues, data);
+      final response = await productProvider.postProduct(
+          imagePath, varianValues, data); //upload
+      Get.offAllNamed(Routes.HOME); //pindah page
       if (response.statusCode == 200 || response.statusCode == 201) {
         print(response.body);
         clearControllersAndImages(); // Membersihkan controller dan daftar gambar
-        Get.offAllNamed(Routes.HOME);
+
         Get.showSnackbar(snackBarSuccesfullyCreateProduct());
-      } else {
-        Get.back();
-        Get.showSnackbar(snackBarTimeOut());
-        print(response.statusCode);
-        print(response.body);
       }
+      // else {
+      //   Get.back();
+      //   Get.showSnackbar(snackBarTimeOut());
+      //   print(response.statusCode);
+      //   print(response.body);
+      // }
       print('after fetch to api');
     } catch (e) {
       print(e.toString());

@@ -21,7 +21,7 @@ class ProductProvider extends GetConnect {
         },
       );
   Future<Response> postProduct(
-      List<String> listImage, List<String> varian, Map data) {
+      List<String> listImage, List<String> varian, Map data) async {
     try {
       final form = FormData({});
       data.forEach((key, value) {
@@ -40,7 +40,7 @@ class ProductProvider extends GetConnect {
         ));
       }
 
-      return post(
+      dynamic response = await post(
         AppApi.BASEURL + AppApi.product,
         form,
         headers: {
@@ -49,6 +49,7 @@ class ProductProvider extends GetConnect {
           'Content-Type': 'multipart/form-data; boundary=${form.boundary}',
         },
       );
+      return response;
     } catch (e) {
       return Future.error(e.toString());
     }
