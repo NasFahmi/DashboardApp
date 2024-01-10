@@ -37,8 +37,8 @@ class DetailProductController extends GetxController {
       final response = await productProvider.getProductById(productArgument);
       if (response.statusCode == 200) {
         print('sucess fetch status code 200');
-        print(response.body);
-        Map<String, dynamic> responseData = response.body;
+        print(response.data);
+        Map<String, dynamic> responseData = response.data;
         productDetailInformation.value = ProductDetail.fromJson(responseData);
         print(productDetailInformation.value.data?.fotos?.first.url);
         print(productDetailInformation.value.data?.varians?.length);
@@ -52,7 +52,7 @@ class DetailProductController extends GetxController {
       final response = await productProvider.deleteProduct(productArgument);
       if (response.statusCode == 200) {
         print('status fecth 200 ok');
-        print(response.body);
+        print(response.data);
         Get.offAllNamed(Routes.HOME);
         Get.showSnackbar(snackBarSuccesfullyDeleteProduct());
         Get.find<ProdukController>().refresh();
@@ -60,7 +60,7 @@ class DetailProductController extends GetxController {
         Get.back();
         Get.showSnackbar(snackBarTimeOut());
         print(response.statusCode);
-        print(response.body);
+        print(response.data);
       }
     } catch (e) {
       return Future.error(e.toString());

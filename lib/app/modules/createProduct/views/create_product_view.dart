@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -383,8 +384,13 @@ class CreateProductView extends GetView<CreateProductController> {
               ),
             ),
           ),
-          onPressed: () {
-            controller.uploadProduct();
+          onPressed: () async {
+            await controller.uploadProduct().timeout(
+              Duration(seconds: 15),
+              onTimeout: () {
+                throw TimeoutException('error timeout running');
+              },
+            );
           },
           child: Text('Submit'),
         ),

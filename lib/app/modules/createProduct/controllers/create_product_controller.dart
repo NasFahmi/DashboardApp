@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -67,21 +68,27 @@ class CreateProductController extends GetxController {
 
     try {
       print('fetch to api');
-      final response = await productProvider.postProduct(
-          imagePath, varianValues, data); //upload
-      Get.offAllNamed(Routes.HOME); //pindah page
+      final response = await productProvider
+          .postProduct(imagePath, varianValues, data)
+          .timeout(
+        Duration(seconds: 15),
+        onTimeout: () {
+          throw TimeoutException('error timeout exception');
+        },
+      ); //upload
+
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print(response.body);
+        print(response.data);
         clearControllersAndImages(); // Membersihkan controller dan daftar gambar
+        Get.offAllNamed(Routes.HOME); //pindah page
 
         Get.showSnackbar(snackBarSuccesfullyCreateProduct());
+      } else {
+        Get.back();
+        Get.showSnackbar(snackBarTimeOut());
+        print(response.statusCode);
+        print(response.data);
       }
-      // else {
-      //   Get.back();
-      //   Get.showSnackbar(snackBarTimeOut());
-      //   print(response.statusCode);
-      //   print(response.body);
-      // }
       print('after fetch to api');
     } catch (e) {
       print(e.toString());

@@ -107,7 +107,7 @@ class EditProductController extends GetxController {
       final response = await productProvider.editProduct(
           productId!, imagePath, varianValues, data);
       if (response.statusCode == 200) {
-        print(response.body);
+        print(response.data);
         images.clear();
         imagePath.clear();
         print('success update');

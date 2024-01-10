@@ -38,8 +38,8 @@ class ProdukController extends GetxController {
       print('after fetch api');
       if (response.statusCode == 200) {
         print('success fetch api');
-        print(response.body);
-        Map<String, dynamic> responseData = response.body;
+        print(response.data);
+        Map<String, dynamic> responseData = response.data;
         print(responseData);
         productInformation.value = ListProduct.fromJson(responseData);
         mainProductList.clear();
