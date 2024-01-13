@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:pawonkoe/app/modules/Produk/controllers/produk_controller.dart';
-import 'package:pawonkoe/app/modules/Transaksi/controllers/transaksi_controller.dart';
+import 'package:Pawonkoe/app/modules/Produk/controllers/produk_controller.dart';
+import 'package:Pawonkoe/app/modules/Transaksi/controllers/transaksi_controller.dart';
 import '../controllers/home_controller.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import '../../../../app/theme/colors.dart';

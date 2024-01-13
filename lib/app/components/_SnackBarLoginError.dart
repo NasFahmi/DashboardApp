@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:pawonkoe/app/theme/colors.dart';
+import 'package:Pawonkoe/app/theme/colors.dart';
 
 GetSnackBar snackBarLoginErrors() {
   return GetSnackBar(

@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
-import 'package:pawonkoe/app/data/models/DetailProductModel.dart';
-import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
-import 'package:pawonkoe/app/modules/Produk/controllers/produk_controller.dart';
-import 'package:pawonkoe/app/modules/home/views/home_view.dart';
-import 'package:pawonkoe/app/routes/app_pages.dart';
+import 'package:Pawonkoe/app/components/_SnackBarLoginError.dart';
+import 'package:Pawonkoe/app/data/models/DetailProductModel.dart';
+import 'package:Pawonkoe/app/data/providers/ProductProvider.dart';
+import 'package:Pawonkoe/app/modules/Produk/controllers/produk_controller.dart';
+import 'package:Pawonkoe/app/modules/home/views/home_view.dart';
+import 'package:Pawonkoe/app/routes/app_pages.dart';
 
 class DetailProductController extends GetxController {
   //TODO: Implement DetailProductController

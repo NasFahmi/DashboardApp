@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
-import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
-import 'package:pawonkoe/app/data/models/DetailProductModel.dart';
-import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
-import 'package:pawonkoe/app/modules/createProduct/controllers/image_helper.dart';
-import 'package:pawonkoe/app/routes/app_pages.dart';
+import 'package:Pawonkoe/app/components/_SnackBarLoginError.dart';
+import 'package:Pawonkoe/app/data/models/DetailProductModel.dart';
+import 'package:Pawonkoe/app/data/providers/ProductProvider.dart';
+import 'package:Pawonkoe/app/modules/createProduct/controllers/image_helper.dart';
+import 'package:Pawonkoe/app/routes/app_pages.dart';
 
 class EditProductController extends GetxController {
   //TODO: Implement EditProductController

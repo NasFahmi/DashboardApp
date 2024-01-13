@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pawonkoe/app/data/models/ProductModel.dart';
-import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
+import 'package:Pawonkoe/app/data/models/ProductModel.dart';
+import 'package:Pawonkoe/app/data/providers/ProductProvider.dart';
 
 class ProdukController extends GetxController {
   ProductProvider productProvider = ProductProvider();

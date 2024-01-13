@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
-import 'package:pawonkoe/app/data/providers/AuthProvider.dart';
-import 'package:pawonkoe/app/data/models/AuthModel.dart';
-import 'package:pawonkoe/app/data/providers/TokenHelper.dart';
-import 'package:pawonkoe/app/routes/app_pages.dart';
+import 'package:Pawonkoe/app/components/_SnackBarLoginError.dart';
+import 'package:Pawonkoe/app/data/providers/AuthProvider.dart';
+import 'package:Pawonkoe/app/data/models/AuthModel.dart';
+import 'package:Pawonkoe/app/data/providers/TokenHelper.dart';
+import 'package:Pawonkoe/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/models/api.dart';

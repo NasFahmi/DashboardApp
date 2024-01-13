@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:pawonkoe/app/modules/Transaksi/controllers/transaksi_controller.dart';
-import 'package:pawonkoe/app/theme/colors.dart';
+import 'package:Pawonkoe/app/modules/Transaksi/controllers/transaksi_controller.dart';
+import 'package:Pawonkoe/app/theme/colors.dart';
 
 class BarDataPendapatan extends StatelessWidget {
   final TransaksiController controller = Get.put(TransaksiController());

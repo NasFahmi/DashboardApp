@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:pawonkoe/app/data/models/api.dart';
-import 'package:pawonkoe/app/data/providers/TokenHelper.dart';
+import 'package:Pawonkoe/app/data/models/api.dart';
+import 'package:Pawonkoe/app/data/providers/TokenHelper.dart';
 
 class ProductProvider {
   final Dio dio = Dio();

@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
-import 'package:pawonkoe/app/routes/app_pages.dart';
-import 'package:pawonkoe/app/theme/colors.dart';
+import 'package:Pawonkoe/app/routes/app_pages.dart';
+import 'package:Pawonkoe/app/theme/colors.dart';
 
 import '../controllers/produk_controller.dart';
 

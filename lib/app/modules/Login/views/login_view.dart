@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pawonkoe/app/theme/colors.dart';
+import 'package:Pawonkoe/app/theme/colors.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {

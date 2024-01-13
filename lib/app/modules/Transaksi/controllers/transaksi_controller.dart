@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:pawonkoe/app/data/models/ChartModel.dart';
-import 'package:pawonkoe/app/data/models/TransaksiModel.dart';
-import 'package:pawonkoe/app/data/providers/TransaksiProvider.dart';
+import 'package:Pawonkoe/app/data/models/ChartModel.dart';
+import 'package:Pawonkoe/app/data/models/TransaksiModel.dart';
+import 'package:Pawonkoe/app/data/providers/TransaksiProvider.dart';
 
 class TransaksiController extends GetxController {
   TransaksiProvider transaksiProvider = TransaksiProvider();

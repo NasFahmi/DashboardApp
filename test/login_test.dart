@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pawonkoe/app/data/models/AuthModel.dart';
-import 'package:pawonkoe/app/data/providers/AuthProvider.dart';
-import 'package:pawonkoe/app/data/models/api.dart';
+import 'package:Pawonkoe/app/data/models/AuthModel.dart';
+import 'package:Pawonkoe/app/data/providers/AuthProvider.dart';
+import 'package:Pawonkoe/app/data/models/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

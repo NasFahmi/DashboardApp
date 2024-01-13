@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:pawonkoe/app/theme/colors.dart';
-import 'package:pawonkoe/app/components/_card_dashboard.dart';
+import 'package:Pawonkoe/app/theme/colors.dart';
+import 'package:Pawonkoe/app/components/_card_dashboard.dart';
 import '../controllers/dashboard_controller.dart';
 import 'package:intl/intl.dart';
 

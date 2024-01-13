@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pawonkoe/app/components/_SnackBarLoginError.dart';
-import 'package:pawonkoe/app/data/providers/ProductProvider.dart';
-import 'package:pawonkoe/app/modules/createProduct/controllers/image_helper.dart';
-import 'package:pawonkoe/app/routes/app_pages.dart';
+import 'package:Pawonkoe/app/components/_SnackBarLoginError.dart';
+import 'package:Pawonkoe/app/data/providers/ProductProvider.dart';
+import 'package:Pawonkoe/app/modules/createProduct/controllers/image_helper.dart';
+import 'package:Pawonkoe/app/routes/app_pages.dart';
 
 class CreateProductController extends GetxController {
   ProductProvider productProvider = ProductProvider();

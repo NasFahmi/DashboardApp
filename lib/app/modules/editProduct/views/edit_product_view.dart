@@ -8,8 +8,8 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pawonkoe/app/components/TextFormFieldComponent.dart';
-import 'package:pawonkoe/app/theme/colors.dart';
+import 'package:Pawonkoe/app/components/TextFormFieldComponent.dart';
+import 'package:Pawonkoe/app/theme/colors.dart';
 
 import '../controllers/edit_product_controller.dart';
 

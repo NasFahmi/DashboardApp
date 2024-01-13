@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import 'package:pawonkoe/app/data/models/api.dart';
-import 'package:pawonkoe/app/data/providers/TokenHelper.dart';
+import 'package:Pawonkoe/app/data/models/api.dart';
+import 'package:Pawonkoe/app/data/providers/TokenHelper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardProvider extends GetConnect {
