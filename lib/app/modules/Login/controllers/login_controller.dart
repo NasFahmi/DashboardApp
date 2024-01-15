@@ -7,7 +7,6 @@ import 'package:Pawonkoe/app/data/providers/AuthProvider.dart';
 import 'package:Pawonkoe/app/data/models/AuthModel.dart';
 import 'package:Pawonkoe/app/data/providers/TokenHelper.dart';
 import 'package:Pawonkoe/app/routes/app_pages.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/models/api.dart';
 
