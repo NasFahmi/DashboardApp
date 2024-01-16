@@ -244,6 +244,8 @@ class DashboardView extends GetView<DashboardController> {
                                       color: AppColors.primaryTextColor,
                                       fontWeight: FontWeight.w800,
                                     ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
                                   ),
                                 ),
                                 Obx(
