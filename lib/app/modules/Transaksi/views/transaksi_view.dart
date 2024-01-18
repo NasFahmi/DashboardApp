@@ -234,7 +234,7 @@ class TransaksiView extends GetView<TransaksiController> {
                               ),
                               Text(
                                 '${controller.transaksiInformation.value.data?[index].tanggal}',
-                                style: TextStyle(fontSize: 12.sp),
+                                style: TextStyle(fontSize: 8.sp),
                               ),
                             ],
                           ),
