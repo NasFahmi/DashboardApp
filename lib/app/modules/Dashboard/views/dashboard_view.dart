@@ -246,7 +246,6 @@ class DashboardView extends GetView<DashboardController> {
                                       fontWeight: FontWeight.w800,
                                     ),
                                     overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
                                   ),
                                 ),
                                 Obx(

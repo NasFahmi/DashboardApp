@@ -142,11 +142,16 @@ class TransaksiView extends GetView<TransaksiController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        '${controller.transaksiInformation.value.data?[index].products?.namaProduct}',
-                                        style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w800,
+                                      Container(
+                                        width: 150,
+                                        child: Text(
+                                          maxLines: 1,
+                                          '${controller.transaksiInformation.value.data?[index].products?.namaProduct}',
+                                          style: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       // nama products, harga product, tanggal, status
@@ -232,9 +237,12 @@ class TransaksiView extends GetView<TransaksiController> {
                                   ),
                                 ],
                               ),
-                              Text(
-                                '${controller.transaksiInformation.value.data?[index].tanggal}',
-                                style: TextStyle(fontSize: 8.sp),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: Text(
+                                  '${controller.transaksiInformation.value.data?[index].tanggal}',
+                                  style: TextStyle(fontSize: 8.sp),
+                                ),
                               ),
                             ],
                           ),
