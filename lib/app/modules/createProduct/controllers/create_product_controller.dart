@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:Pawonkoe/app/components/_SnackBarLoginError.dart';
 import 'package:Pawonkoe/app/data/providers/ProductProvider.dart';
 import 'package:Pawonkoe/app/modules/createProduct/controllers/image_helper.dart';

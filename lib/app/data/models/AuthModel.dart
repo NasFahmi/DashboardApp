@@ -24,30 +24,20 @@ class Data {
   int? id;
   String? nama;
   String? email;
-  String? linkToko;
-  String? linkWa;
-  String? linkIg;
-  String? alamat;
-
+  
   Data(
       {this.token,
       this.id,
       this.nama,
       this.email,
-      this.linkToko,
-      this.linkWa,
-      this.linkIg,
-      this.alamat});
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     token = json['token'];
     id = json['id'];
     nama = json['nama'];
     email = json['email'];
-    linkToko = json['link_toko'];
-    linkWa = json['link_wa'];
-    linkIg = json['link_ig'];
-    alamat = json['alamat'];
+    
   }
 
   Map<String, dynamic> toJson() {
@@ -56,10 +46,7 @@ class Data {
     data['id'] = this.id;
     data['nama'] = this.nama;
     data['email'] = this.email;
-    data['link_toko'] = this.linkToko;
-    data['link_wa'] = this.linkWa;
-    data['link_ig'] = this.linkIg;
-    data['alamat'] = this.alamat;
+    
     return data;
   }
 }

@@ -29,8 +29,8 @@ class ListTransaksi {
 class Data {
   int? id;
   String? tanggal;
-  int? jumlah;
-  int? isComplete;
+  String? jumlah;
+  String? isComplete;
   Products? products;
 
   Data({this.id, this.tanggal, this.jumlah, this.isComplete, this.products});
