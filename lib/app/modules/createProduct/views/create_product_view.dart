@@ -43,86 +43,86 @@ class CreateProductView extends GetView<CreateProductController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Nama Product',
                       textAlign: TextAlign.start,
                       style: TextStyle(),
                     ),
-                    Gap(4),
+                    const Gap(4),
                     TextFormFieldComponent(
                       controllerForm: controller.namaProduct,
                       validationForm: 'Nama Product Tidak Boleh Kosong',
                       hintTextField: 'Nama Product',
                       regex: RegExp(r'^[a-zA-Z0-9 !@#$%^&*()-_+=]+$'),
                     ),
-                    Text(
+                    const Text(
                       'Harga',
                       textAlign: TextAlign.start,
                       style: TextStyle(),
                     ),
-                    Gap(4),
+                    const Gap(4),
                     TextFormFieldComponent(
                       controllerForm: controller.harga,
                       validationForm: 'Harga Tidak Boleh Kosong',
                       hintTextField: 'Harga Product',
                       regex: RegExp(r'^[0-9]*$'),
                     ),
-                    Text(
+                    const Text(
                       'Deskripsi',
                       textAlign: TextAlign.start,
                       style: TextStyle(),
                     ),
-                    Gap(4),
+                    const Gap(4),
                     TextFormFieldComponent(
                       validationForm: 'Derksipsi Tidak Boleh Kosong',
                       controllerForm: controller.deskripsi,
                       hintTextField: 'Deskripsi',
                       regex: RegExp(r'^[a-zA-Z0-9 !@#$%^&*()-_+=]+$'),
                     ),
-                    Text(
+                    const Text(
                       'Link Shopee',
                       textAlign: TextAlign.start,
                       style: TextStyle(),
                     ),
-                    Gap(4),
+                    const Gap(4),
                     TextFormFieldComponent(
                       validationForm: 'Link Shopee Tidak Boleh Kosong',
                       controllerForm: controller.linkShopee,
                       hintTextField: 'Link Shopee',
                       regex: RegExp(r'^[a-zA-Z0-9 !@#$%^&*()-_+=]+$'),
                     ),
-                    Text(
+                    const Text(
                       'Stok',
                       textAlign: TextAlign.start,
                       style: TextStyle(),
                     ),
-                    Gap(4),
+                    const Gap(4),
                     TextFormFieldComponent(
                       validationForm: 'Stok Tidak Boleh Kosong',
                       controllerForm: controller.stok,
                       hintTextField: 'Stok',
                       regex: RegExp(r'^[a-zA-Z0-9]+$'),
                     ),
-                    Text(
+                    const Text(
                       'Spesifikasi',
                       textAlign: TextAlign.start,
                       style: TextStyle(),
                     ),
-                    Gap(4),
+                    const Gap(4),
                     TextFormFieldComponent(
                       controllerForm: controller.spesifikasi,
                       validationForm: 'Spesifikasi Product Tidak Boleh Kosong',
                       hintTextField: 'Spesifikasi Product',
                       regex: RegExp(r'^[a-zA-Z0-9 !@#$%^&*()-_+=]+$'),
                     ),
-                    Gap(4),
-                    Text('Varian'),
-                    Gap(4),
+                    const Gap(4),
+                    const Text('Varian'),
+                    const Gap(4),
                     Obx(
                       () => ListView.builder(
                         padding: EdgeInsets.symmetric(vertical: 8.h),
                         itemCount: controller.varianControllers.length,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Column(
@@ -154,29 +154,29 @@ class CreateProductView extends GetView<CreateProductController> {
                                             .varianControllers.length);
                                       }
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       FluentIcons.delete_24_regular,
                                     ),
                                     color: AppColors.redColorPrimary,
                                   )
                                 ],
                               ),
-                              Divider()
+                              const Divider()
                             ],
                           );
                         },
                       ),
                     ),
-                    Gap(8),
+                    const Gap(8),
                     controller.images.isNotEmpty
                         ? Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 16.0),
                             child: GridView.builder(
                               shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 4,
                                 crossAxisSpacing: 10,
                                 mainAxisSpacing: 10,
@@ -188,7 +188,7 @@ class CreateProductView extends GetView<CreateProductController> {
                                   children: [
                                     ClipRRect(
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          const BorderRadius.all(Radius.circular(12)),
                                       child: Image(
                                         width: 100.w,
                                         height: 100.w,
@@ -204,7 +204,7 @@ class CreateProductView extends GetView<CreateProductController> {
                                       child: Container(
                                         width: 24.w,
                                         height: 24.h,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: AppColors.redColorThirdy,
                                           shape: BoxShape.circle,
                                         ),
@@ -225,15 +225,15 @@ class CreateProductView extends GetView<CreateProductController> {
                               },
                             ),
                           )
-                        : Text('Upload Foto'),
-                    Gap(20),
+                        : const Text('Upload Foto'),
+                    const Gap(20),
                     Row(
                       children: [
                         Expanded(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.greenThird,
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               // minimumSize: Size(Get.width / 2, 40.h),
                               foregroundColor: AppColors.backgroundColor,
                               shape: RoundedRectangleBorder(
@@ -247,15 +247,15 @@ class CreateProductView extends GetView<CreateProductController> {
                                   .add(TextEditingController());
                               print(controller.varianControllers.length);
                             },
-                            child: Text('Tambah Varian'),
+                            child: const Text('Tambah Varian'),
                           ),
                         ),
-                        Gap(20),
+                        const Gap(20),
                         Expanded(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.blueColorThird,
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               // fixedSize: Size(Get.width / 2, 40.h),
                               foregroundColor: AppColors.backgroundColor,
                               shape: RoundedRectangleBorder(
@@ -267,12 +267,12 @@ class CreateProductView extends GetView<CreateProductController> {
                             onPressed: () {
                               ModalBottomSheetImagePicker(context);
                             },
-                            child: Text('Pilih Gambar'),
+                            child: const Text('Pilih Gambar'),
                           ),
                         ),
                       ],
                     ),
-                    Gap(16),
+                    const Gap(16),
                     GestureDetector(
                       onTap: () {
                         if (controller.formKey.value.currentState?.validate() ??
@@ -304,7 +304,7 @@ class CreateProductView extends GetView<CreateProductController> {
                         ),
                       ),
                     ),
-                    Gap(16),
+                    const Gap(16),
                   ],
                 ),
               ),
@@ -342,7 +342,7 @@ class CreateProductView extends GetView<CreateProductController> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Gap(4),
+              const Gap(4),
             ],
           ),
         ),
@@ -354,7 +354,7 @@ class CreateProductView extends GetView<CreateProductController> {
             minimumSize: Size(Get.width / 2.75, 40.h),
             backgroundColor: Colors.transparent,
             shape: RoundedRectangleBorder(
-              side: BorderSide(
+              side: const BorderSide(
                 color: AppColors.secondaryTextColor,
                 width: 1,
               ),
@@ -366,7 +366,7 @@ class CreateProductView extends GetView<CreateProductController> {
           onPressed: () {
             Get.back(); // Close the dialog
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -375,7 +375,7 @@ class CreateProductView extends GetView<CreateProductController> {
             minimumSize: Size(Get.width / 2.75, 40.h),
             backgroundColor: Colors.blue.shade600,
             shape: RoundedRectangleBorder(
-              side: BorderSide(
+              side: const BorderSide(
                 color: AppColors.secondaryTextColor,
                 width: 1,
               ),
@@ -386,13 +386,13 @@ class CreateProductView extends GetView<CreateProductController> {
           ),
           onPressed: () async {
             await controller.uploadProduct().timeout(
-              Duration(seconds: 15),
+              const Duration(seconds: 15),
               onTimeout: () {
                 throw TimeoutException('error timeout running');
               },
             );
           },
-          child: Text('Submit'),
+          child: const Text('Submit'),
         ),
       ],
     );
@@ -405,7 +405,7 @@ class CreateProductView extends GetView<CreateProductController> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Gap(20),
+            const Gap(20),
             Text(
               'Pilih Gambar Melalui',
               style: TextStyle(
@@ -413,10 +413,10 @@ class CreateProductView extends GetView<CreateProductController> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            Gap(16),
+            const Gap(16),
             ListTile(
-              leading: Icon(FluentIcons.image_24_regular),
-              title: Text('Gallery'),
+              leading: const Icon(FluentIcons.image_24_regular),
+              title: const Text('Gallery'),
               onTap: () async {
                 final List<XFile> files =
                     await controller.imageHelper.pickImage(multiple: true);
@@ -425,8 +425,8 @@ class CreateProductView extends GetView<CreateProductController> {
               },
             ),
             ListTile(
-              leading: Icon(FluentIcons.camera_24_regular),
-              title: Text('Kamera'),
+              leading: const Icon(FluentIcons.camera_24_regular),
+              title: const Text('Kamera'),
               onTap: () async {
                 final file = await controller.imageHelper.pickCamera();
                 if (file != null) {

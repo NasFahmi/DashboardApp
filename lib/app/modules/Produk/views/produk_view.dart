@@ -113,6 +113,7 @@ class ProdukView extends GetView<ProdukController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
+                                                  maxLines: 1,
                                                   '${controller.productDisplayList[index].namaProduct}',
                                                   style: TextStyle(
                                                       color: AppColors

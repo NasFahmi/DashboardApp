@@ -238,6 +238,7 @@ class DashboardView extends GetView<DashboardController> {
                                 Gap(4.h),
                                 Obx(
                                   () => Text(
+                                    maxLines: 1,
                                     '${controller.dashboardData.value.data?.product?[index].namaProduct.toString()}',
                                     style: TextStyle(
                                       fontSize: 14.sp,
